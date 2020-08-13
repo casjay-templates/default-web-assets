@@ -464,11 +464,11 @@ sub return_html {
  print "<tr><td colspan=3><BR></td></tr><tr>\n";
  print "<td colspan=3 align=center bgcolor=#D0D0D0>
  <font face=arial>Please direct all inquiries to <a href=\"mailto:$Config{'recipient'}\">$Config{'recipient'}</a></td></tr>\n";
-        if ($Config{'return_link_url'} && $Config{'return_link_title'}) {
-            print "<td colspan=3 align=center bgcolor=#D0D0D0><font face=arial><a href=\"$Config{'return_link_url'}\">$Config{'return_link_title'}</a></td></tr>\n";
+if ($Config{'return_link_url'} && $Config{'return_link_title'}) {
+print "<td colspan=3 align=center bgcolor=#D0D0D0><font face=arial><a href=\"$Config{'return_link_url'}\">$Config{'return_link_title'}</a></td></tr>\n";
 }
-            print "<font face=arial size=-2><a href="javascript: history.go(-1)">Go Back</a><br>\n";
-            print "<td colspan=3 align=center bgcolor=#C0C0C0><font face=arial size=-2><a href=\"http://casjaysdev.com/\">CasjaysDev</a></td></tr>\n";
+print "<td colspan=3 align=center bgcolor=#C0C0C0><font face=arial size=-2><a href=\"javascript: history.go(-1)\"></a></td></tr>\n";
+print "<td colspan=3 align=center bgcolor=#C0C0C0><font face=arial size=-2><a href=\"http://casjaysdev.com/\">CasjaysDev</a></td></tr>\n";
  print "</table></td></tr></table>\n";
  print "<br clear=all></center>\n";
 
