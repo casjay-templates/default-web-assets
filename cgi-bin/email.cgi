@@ -1079,7 +1079,9 @@ Content-type: text/html
                 <td width=150>
                 </td></tr><tr><td colspan=3><br></td></tr>
                 <tr><td colspan=3 align=center bgcolor=#C0C0C0>
-                <font face=arial size=-2><a href="javascript: history.go(-1)">Go Back</a><br><a href="http://casjaysdev.com">CasjaysDev.com</a>
+                <font face=arial size=-2>
+                <a href="javascript: history.go(-1)">Go Back</a><br>
+                <a href="http://casjaysdev.com">CasjaysDev.com</a>
                 </td>
                 </tr>
           </table>
@@ -1114,7 +1116,9 @@ Content-type: text/html
                 <td width=150>
                 </td></tr><tr><td colspan=3><br></td></tr>
                 <tr><td colspan=3 align=center bgcolor=#C0C0C0>
-                <font face=arial size=-2><a href="javascript: history.go(-1)">Go Back</a><br><a href="http://casjaysdev.com">CasjaysDev.com</a>
+                <font face=arial size=-2>
+                <a href="javascript: history.go(-1)">Go Back</a>
+                <br><a href="http://casjaysdev.com">CasjaysDev.com</a>
                 </td>
                 </tr>
           </table>
