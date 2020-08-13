@@ -1109,7 +1109,8 @@ Content-type: text/html
           <table   border=0 cellpadding=2 cellspacing=0 width=650>
                <tr>
                <td colspan=3 align=center bgcolor=#333366><font face=arial size=+2 color=#FFFFFF><b>
-              GFFormMail</b></td></tr>
+              CasjaysDev Formail
+              </b></td></tr>
                 <tr>
                 <td width=150>
                </td>
@@ -1159,7 +1160,9 @@ Content-type: text/html
                 <td width=150>
                 </td></tr><tr><td colspan=3><br></td></tr>
                 <tr><td colspan=3 align=center bgcolor=#C0C0C0>
-                <font face=arial size=-2><a href="javascript: history.go(-1)">Go Back</a><br><a href="http://casjaysdev.com">CasjaysDev.com</a>
+                <font face=arial size=-2>
+                <a href="javascript: history.go(-1)">Go Back</a><br>
+                <a href="http://casjaysdev.com">CasjaysDev.com</a>
                 </td>
                 </tr>
           </table>
@@ -1199,7 +1202,9 @@ Content-type: text/html
                 <td width=150>
                 </td></tr><tr><td colspan=3><br></td></tr>
                 <tr><td colspan=3 align=center bgcolor=#C0C0C0>
-                <font face=arial size=-2><a href="javascript: history.go(-1)">Go Back</a><br><a href="http://casjaysdev.com">CasjaysDev.com</a>
+                <font face=arial size=-2>
+                <a href="javascript: history.go(-1)">Go Back</a><br>
+                <a href="http://casjaysdev.com">CasjaysDev.com</a>
                 </td>
                 </tr>
           </table>
@@ -1251,7 +1256,9 @@ $missing_field_list
                 <td width=150>
                 </td></tr><tr><td colspan=3><br></td></tr>
                 <tr><td colspan=3 align=center bgcolor=#C0C0C0>
-                <font face=arial size=-2><a href="javascript: history.go(-1)">Go Back</a><br><a href="http://casjaysdev.com">CasjaysDev.com</a>
+                <font face=arial size=-2>
+                <a href="javascript: history.go(-1)">Go Back</a><br>
+                <a href="http://casjaysdev.com">CasjaysDev.com</a>
                 </td>
                 </tr>
           </table>
