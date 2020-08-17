@@ -119,6 +119,10 @@ blockquote {
   font-style: italic;
 }
 
+btn-block {
+  width: 40%;
+}
+
 code,
 pre {
   font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
@@ -326,7 +330,4 @@ footer {
     color: #444;
   }
  
-  .btn-block {
-    width: 40%;
-  }
 }
