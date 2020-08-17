@@ -83,6 +83,11 @@ h3 {
   line-height: 1.1;
 }
 
+h1 {
+  text-align: center;
+  font: 2em Lato;
+}
+
 h2 {
   color: #393939;
 }
@@ -332,5 +337,4 @@ footer {
     font-size: 12pt;
     color: #444;
   }
- 
 }
