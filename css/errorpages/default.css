@@ -122,6 +122,8 @@ blockquote {
 .btn-block {
   width: 40%;
   text-align: center;
+  display: block;
+  margin: 0 auto;
 }
 
 code,
