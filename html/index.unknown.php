@@ -2,9 +2,15 @@
 <html>
 
 <head>
-  <?php include "https://static.casjay.net/casjays-header.php"; ?>
   <title>Domain Doesn't Exist</title>
-
+  <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
+  <link rel="stylesheet" href="/default-css/casjaysdev.css">
+  <link rel="stylesheet" href="/default-css/errorpages/default.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <script src="/default-js/errorpages/isup.js"></script>
+  <script src="/default-js/errorpages/homepage.js"></script>
+  <script src="/default-js/errorpages/loaddomain.js"></script>
+  <?php include "https://static.casjay.net/casjays-header.php"; ?>
 </head>
 
 <body>
