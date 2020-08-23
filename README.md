@@ -4,5 +4,5 @@ Default web assets I use on all my sites
 
 ```bash
 STATICSITE="MYSITE"
-bash -c "$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/master/setup.sh)"
+sudo bash -c "$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/master/setup.sh)"
 ```
