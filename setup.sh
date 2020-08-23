@@ -3,8 +3,13 @@
 #change to match your setup
 STATICSITE="${STATICSITE:-static.casjay.net}"
 
-[ -d /usr/share/httpd/.git ] && echo "Updating Web Assets" && git -C /usr/share/httpd pull -q ||
-rm -Rf /usr/share/httpd && echo "Cloning Default Web Assets"
-git clone -q https://github.com/casjay-templates/default-web-assets /usr/share/httpd
+if [ -d /usr/share/httpd/.git ]; then
+  echo "Updating Web Assets"
+  git -C /usr/share/httpd pull -q
+else
+  rm -Rf /usr/share/httpd
+  echo "Cloning Default Web Assets"
+  git clone -q https://github.com/casjay-templates/default-web-assets /usr/share/httpd
+fi
 
 find /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s#static.casjay.net#$STATICSITE#g" {} \; >/dev/null 2>&1
