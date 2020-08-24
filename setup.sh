@@ -6,6 +6,11 @@ STATICSITE="${STATICSITE:-static.casjay.net}"
 if [ -d /usr/share/httpd/.git ]; then
   echo "Updating Web Assets"
   git -C /usr/share/httpd pull -q
+  if [ "$?" -ne 0 ]; then
+    rm -Rf /usr/share/httpd
+    echo "Cloning Default Web Assets"
+    git clone -q https://github.com/casjay-templates/default-web-assets /usr/share/httpd
+  fi
 else
   rm -Rf /usr/share/httpd
   echo "Cloning Default Web Assets"
