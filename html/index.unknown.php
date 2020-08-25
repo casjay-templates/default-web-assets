@@ -11,6 +11,7 @@
   <script src="/default-js/errorpages/homepage.js"></script>
   <script src="/default-js/errorpages/loaddomain.js"></script>
   <?php include "https://static.casjay.net/casjays-header.php"; ?>
+  <link rel="icon" href="/default-icons/favicon.png"  type="image/icon png">
 </head>
 
 <body>
