@@ -40,6 +40,7 @@ else
   git clone -q https://github.com/casjay-templates/default-web-assets /usr/share/httpd
 fi
 
+<<<<<<< HEAD
 find /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s#static.casjay.net#$STATICSITE#g" {} \; >/dev/null 2>&1
 find /usr/share/httpd -not -path "./git/*" -type f -iname "*.sh" -iname "*.pl" -iname "*.cgi" -exec chmod 755 -Rf {} \; >/dev/null 2>&1
 
@@ -49,4 +50,14 @@ if [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
 
   find /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's#Redhat based system#Debian based system#g' {} \; >/dev/null 2>&1
   find /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's#href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">#href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"#g' {} \; >/dev/null 2>&1
+=======
+find -L /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s#static.casjay.net#$STATICSITE#g" {} \; >/dev/null 2>&1
+find -L /usr/share/httpd -not -path "./git/*" -type f -iname "*.sh" -iname "*.pl" -iname "*.cgi"  -exec chmod 755 -Rf {} \; >/dev/null 2>&1
+
+if [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
+  find -L /var/www -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's#Redhat based system#Debian based system#g' >/dev/null 2>&1
+  find -L /var/www -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's#href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">#href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"#g' >/dev/null 2>&1
+  find -L /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's#Redhat based system#Debian based system#g' >/dev/null 2>&1
+  find -L /usr/share/httpd -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's#href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">#href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"#g' >/dev/null 2>&1
+>>>>>>> 48bbf177aa7d2d2a63235aca7ae588e4523a6248
 fi
