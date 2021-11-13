@@ -399,14 +399,6 @@ sub return_html {
         print "<tr><td colspan=3><BR></td></tr>\n";
 
 
-
-
-        if ($Form{'Email'}) {
-            print "<tr><td align=right><font face=arial><b>E-mail:</b></td>\n";
-	    print "<td align=left><font face=arial>$Form{'Email'}</td><td width=100></td></tr>\n";
-        }
-
-
         # Sort alphabetically if specified:                                  #
         if ($Config{'sort'} eq 'alphabetic') {
             foreach $field (sort keys %Form) {
