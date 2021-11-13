@@ -104,7 +104,7 @@ $cfh = select (STDOUT);
 # $mailprog defines the location of your sendmail program on your unix       #
 # system.                                                                    #
 
-$mailprog = '/usr/lib/sendmail -i -t';
+$mailprog = '/usr/bin/env sendmail';
 
 # @referers allows forms to be located only on servers which are defined     #
 # in this field.  This security fix from the last version which allowed      #
