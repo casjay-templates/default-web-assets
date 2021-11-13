@@ -104,7 +104,7 @@ $cfh = select (STDOUT);
 # $mailprog defines the location of your sendmail program on your unix       #
 # system.                                                                    #
 
-$mailprog = '/usr/bin/env sendmail';
+$mailprog = '/usr/bin/env sendmail -oi -t';
 
 # @referers allows forms to be located only on servers which are defined     #
 # in this field.  This security fix from the last version which allowed      #
@@ -490,7 +490,7 @@ sub send_mail {
    undef %is_exclude;
 for (@Exclude) { $is_exclude{$_} = 1 }
     # Open The Mail Program
-    open(MAIL,"|$mailprog -t");
+    open(MAIL,"|$mailprog");
 
 
         print MAIL "To: $Config{'recipient'}\n";
@@ -629,7 +629,7 @@ sub send_GMmail {
     local($print_config,$key,$sort_order,$sorted_field,$env_report);
 
     # Open The Mail Program
-    open(MAIL,"|$mailprog -t");
+    open(MAIL,"|$mailprog");
 
     print MAIL "To: $Config{'recipient'}\n";
     print MAIL "From: $Form{'Email'}\n";
@@ -905,7 +905,7 @@ sub body_attributes {
 sub send_courtesy {
   if ($Config{'courtesy_reply'} && $Form{'Email'})
  {
-   open (MAIL,"|$mailprog -t");
+   open (MAIL,"|$mailprog");
    print MAIL "To: $Form{'Email'} ($Form{'Name'})\n";
    print MAIL "From: $Config{'courtesy_our_email'}\n";
 
