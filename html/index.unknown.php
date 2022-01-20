@@ -10,7 +10,7 @@
   <script src="/default-js/errorpages/isup.js"></script>
   <script src="/default-js/errorpages/homepage.js"></script>
   <script src="/default-js/errorpages/loaddomain.js"></script>
-  <?php include "https://static.casjay.net/casjays-header.php"; ?>
+  <?php include "https://static.casjay.net/casjays-header.php";?>
   <link rel="icon" href="/default-icons/favicon.png"  type="image/icon png">
 </head>
 
@@ -25,11 +25,11 @@
   </div>
   <div class="c5">
     <br>
-    <?php  echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; ?>
+    <?php echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; ?>
     <?php echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR>"; ?>
     <br><br>
-    Linux OsVer: <?php echo shell_exec('cat /etc/redhat-release'); ?><br>
-    ConfigVer: <?php echo shell_exec( 'cat /etc/casjaysdev/updates/versions/configs.txt' ); ?>
+    Linux OsVer: <?php echo shell_exec('cat /etc/casjaysdev/updates/versions/osversion.txt'); ?><br>
+    ConfigVer: <?php echo shell_exec('cat /etc/casjaysdev/updates/versions/configs.txt'); ?>
     <br><br>
     Powered by a Redhat based system<br>
     <a href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg"> </a><br>
@@ -37,7 +37,7 @@
   </div>
   <!-- Begin Casjays Developments Footer -->
   <center>
-    <?php include "https://static.casjay.net/casjays-footer.php"; ?>
+    <?php include "https://static.casjay.net/casjays-footer.php";?>
   </center>
   <!-- End Casjays Developments Footer -->
 </body>
