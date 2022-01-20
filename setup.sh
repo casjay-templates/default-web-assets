@@ -74,8 +74,21 @@ elif [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
   find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
   find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
 fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+echo "Setting up default files"
+if [ -f "/var/www/html/default/index.default.php" ]; then
+  rm -Rf "/var/www/html/default/index.default.php"
+  ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
+fi
+if [ -f "/var/www/html/unknown/index.default.php" ]; then
+  rm -Rf "/var/www/html/unknown/index.default.php"
+  ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.default.php"
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
+  echo "Setting up for Apache user: $APACHE_USER"
   chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
   chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
 fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # End
