@@ -20,7 +20,7 @@ HOME="${USER_HOME:-${HOME}}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #set opts
-
+GET_WEB_USER="$(ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1 | grep '^' || echo '')"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
 STATICDOM="${STATICDOM:-$HOSTNAME}"
@@ -28,6 +28,7 @@ STATICSITE="${STATICSITE:-static.casjay.net}"
 STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
 STATICDIR="${STATICDIR:-/usr/share/httpd}"
 STATICWEB="${STATICWEB:-/var/www}"
+APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   echo "Updating Web Assets in $STATICDIR"
@@ -45,17 +46,18 @@ else
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
-echo "Fixing domain name: $STATICDOM"
+echo "Setting domain name to: $STATICDOM"
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
-echo "Fixing static dir: $STATICWEB"
+echo "Setting static dir to: $STATICWEB"
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix permissions
 echo "Fixing permissions"
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.sh" -iname "*.pl" -iname "*.cgi" -exec chmod 755 -Rf {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.sh" -iname "*.pl" -iname "*.cgi" -exec chmod 755 -Rf {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #### Change for archlinux
 if [ "$(command -v pacman >/dev/null 2>&1)" ]; then
@@ -71,5 +73,9 @@ elif [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
   find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
   find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
   find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
+fi
+if [ -n "$APACHE_USER" ]; then
+  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
+  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
 fi
 # End
