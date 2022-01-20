@@ -30,17 +30,17 @@ STATICDIR="${STATICDIR:-/usr/share/httpd}"
 STATICWEB="${STATICWEB:-/var/www}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
-  echo "Updating Web Assets"
+  echo "Updating Web Assets in $STATICDIR"
   git -C "$STATICDIR" reset --hard
   git -C "$STATICDIR" pull -q
   if [ "$?" -ne 0 ]; then
     rm -Rf "$STATICDIR"
-    echo "Cloning Default Web Assets"
+    echo "Cloning Default Web Assets to $STATICDIR"
     git clone -q "$STATICREPO" "$STATICDIR"
   fi
 else
-  rm -Rf "$STATICDIR"
-  echo "Cloning Default Web Assets"
+  [ -d "$STATICDIR" ] && rm -Rf "$STATICDIR"
+  echo "Cloning Default Web Assets to $STATICDIR"
   git clone -q "$STATICREPO" "$STATICDIR"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
