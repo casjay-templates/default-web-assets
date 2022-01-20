@@ -31,7 +31,7 @@ STATICWEB="${STATICWEB:-/var/www}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   echo "Updating Web Assets in $STATICDIR"
-  git -C "$STATICDIR" reset --hard
+  git -C "$STATICDIR" reset --hard &>/dev/null
   git -C "$STATICDIR" pull -q
   if [ "$?" -ne 0 ]; then
     rm -Rf "$STATICDIR"
