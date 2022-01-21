@@ -10,7 +10,7 @@
   <script src="/default-js/errorpages/isup.js"></script>
   <script src="/default-js/errorpages/homepage.js"></script>
   <script src="/default-js/errorpages/loaddomain.js"></script>
-  <?php include "https://static.casjay.net/casjays-header.php";?>
+  <?php include "./casjays-header.php";?>
   <link rel="icon" href="/default-icons/favicon.png"  type="image/icon png">
 </head>
 
@@ -38,7 +38,7 @@
   </div>
   <!-- Begin Casjays Developments Footer -->
   <center>
-    <?php include "https://static.casjay.net/casjays-footer.php";?>
+    <?php include "./casjays-footer.php";?>
   </center>
   <!-- End Casjays Developments Footer -->
 </body>

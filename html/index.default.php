@@ -43,7 +43,7 @@
 
   <center>
     <!-- Begin Casjays Developments Footer -->
-    <?php include "https://static.casjay.net/casjays-footer.php";?>
+    <?php include "./casjays-footer.php";?>
   </center>
   <!-- End Casjays Developments Footer -->
 </body>
