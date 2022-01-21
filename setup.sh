@@ -118,9 +118,9 @@ if [ -n "$APACHE_USER" ]; then
   chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-cat <<EOF | tee /etc/cron.d/static-website
+cat <<EOF | tee /etc/cron.d/static-website &>/dev/null
 # Update webfiles daily
-30 3 * * * root ping -c 2 1.1.1.1 && bash -c "\$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
+30 3 * * * root ping -c 2 1.1.1.1 &>/dev/null && bash -c "\$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
 
 EOF
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
