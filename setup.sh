@@ -120,7 +120,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cat <<EOF | tee /etc/cron.d/static-website
 # Update webfiles daily
-30 3 * * * root ping -c 2 1.1.1.1 && bash -c "$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
+30 3 * * * root ping -c 2 1.1.1.1 && bash -c \"$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
 
 EOF
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
