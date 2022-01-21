@@ -69,13 +69,15 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
 echo "Setting last updated to: $UPDATED_MESSAGE"
-find -L "$STATICDIR" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \;                      #>/dev/null 2>&1
-find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; #>/dev/null 2>&1
+find -L "$STATICDIR" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >/dev/null 2>&1
+find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix copyright year
 echo "Setting copyright year to: $COPYRIGHT_YEAR"
-find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; #>/dev/null 2>&1
-find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; #>/dev/null 2>&1
+find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 echo "Setting domain name to: $STATICDOM"

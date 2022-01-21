@@ -2,7 +2,8 @@
 <div id="footer" class="footer" align="center">
 <br><br><br><br><br><br><br>
 <!-- Begin Casjays Developments Footer -->
-Copyright 1999 - 2020<br>
+Copyright 1999 - 2020
+<br />
 <a href="https://casjay.net" target="_blank">Casjays Developments</a> and <a href="https://jason.malaks.us" target="_blank">Jason M. Hempstead-Malak</a><br>
 Hosting by <a href="https://casjay.net/hosting" target="_blank">Casjays Developments: Hosting</a><br>
 and powered by <a href="https://casjaysdev.com" target="_blank">CasjaysDev.com</a><br><br>
