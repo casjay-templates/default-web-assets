@@ -31,6 +31,7 @@ STATICWEB="${STATICWEB:-/var/www}"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_YEAR="$(date +'%Y')"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
+UPDATED_MESSAGE="$(date +'Last updated on %Y-%m-%d at %H:%M:%S')"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   echo "Updating Web Assets in $STATICDIR"
@@ -57,10 +58,15 @@ if [ -f "/var/www/html/unknown/index.default.php" ]; then
   ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.default.php"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Fix last updated on
+echo "Setting last updated to: $UPDATED_MESSAGE"
+find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >/dev/null 2>&1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix copyright year
 echo "Setting copyright year to: $COPYRIGHT_YEAR"
-find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|Copyright 1999.*|'$COPYRIGHT_FOOTER'|g' {} \; >/dev/null 2>&1
-find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|Copyright 1999.*|'$COPYRIGHT_FOOTER'|g' {} \; >/dev/null 2>&1
+find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 echo "Setting domain name to: $STATICDOM"

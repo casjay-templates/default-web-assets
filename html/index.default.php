@@ -33,9 +33,8 @@
     <?php echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; ?>
     <?php echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR>"; ?> <br>
     Linux OsVer: <?php echo shell_exec('cat /etc/redhat-release'); ?> <br>
-    ConfigVer: <?php echo shell_exec(
-  'cat /etc/casjaysdev/updates/versions/configs.txt'
-); ?>
+    ConfigVer: <?php echo shell_exec('cat /etc/casjaysdev/updates/versions/configs.txt'); ?> <br />
+    Last updated on: REPLACE_LAST_UPDATED_ON_MESSAGE
     <br><br><br>
     Powered by a Redhat based system<br>
     <a href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux"
@@ -44,7 +43,7 @@
 
   <center>
     <!-- Begin Casjays Developments Footer -->
-    <?php include "https://static.casjay.net/casjays-footer.php"; ?>
+    <?php include "https://static.casjay.net/casjays-footer.php";?>
   </center>
   <!-- End Casjays Developments Footer -->
 </body>
