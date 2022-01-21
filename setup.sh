@@ -34,21 +34,21 @@ COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
-  echo "Updating Web Assets in $STATICDIR"
+  printf '%s\n' "Updating Web Assets in $STATICDIR"
   git -C "$STATICDIR" reset --hard &>/dev/null
   git -C "$STATICDIR" pull -q &>/dev/null
   if [ "$?" -ne 0 ]; then
     rm -Rf "$STATICDIR"
-    echo "Cloning Default Web Assets to $STATICDIR"
+    printf '%s\n' "Cloning Default Web Assets to $STATICDIR"
     git clone -q "$STATICREPO" "$STATICDIR" &>/dev/null
   fi
 else
   [ -d "$STATICDIR" ] && rm -Rf "$STATICDIR"
-  echo "Cloning Default Web Assets to $STATICDIR"
+  printf '%s\n' "Cloning Default Web Assets to $STATICDIR"
   git clone -q "$STATICREPO" "$STATICDIR" &>/dev/null
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-echo "Setting up default files"
+printf '%s\n' "Setting up default files"
 if [ -d "/var/www/html/default" ]; then
   [ -f "/var/www/html/default/casjays-header.php" ] || rm -Rf "/var/www/html/default/casjays-header.php"
   [ -f "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
@@ -68,44 +68,44 @@ if [ -d "/var/www/html/unknown" ]; then
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
-echo "Setting last updated to: $UPDATED_MESSAGE"
+printf '%s\n' "Setting last updated to: $UPDATED_MESSAGE"
 find -L "$STATICDIR" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix copyright year
-echo "Setting copyright year to: $COPYRIGHT_YEAR"
+printf '%s\n' "Setting copyright year to: $COPYRIGHT_YEAR"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
-echo "Setting domain name to: $STATICDOM"
+printf '%s\n' "Setting domain name to: $STATICDOM"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
-echo "Setting static dir to: $STATICWEB"
+printf '%s\n' "Setting static dir to: $STATICWEB"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix permissions
-echo "Fixing permissions"
+printf '%s\n' "Fixing permissions"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -o -iname "*.sh" -o -iname "*.pl" -o -iname "*.cgi" \) -exec chmod 755 -Rf {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -o -iname "*.sh" -o -iname "*.pl" -o -iname "*.cgi" \) -exec chmod 755 -Rf {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #### Change for archlinux
 if [ "$(command -v pacman >/dev/null 2>&1)" ]; then
-  echo "Setting up for Arch based distros"
+  printf '%s\n' "Setting up for Arch based distros"
   find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >/dev/null 2>&1
   find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/default-icons/powered_by_archlinux.jpg"|g' {} \; >/dev/null 2>&1
   find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >/dev/null 2>&1
   find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/default-icons/powered_by_archlinux.jpg"|g' {} \; >/dev/null 2>&1
 #### Change for debian/ubuntu
 elif [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
-  echo "Setting up for Debian based distros"
+  printf '%s\n' "Setting up for Debian based distros"
   find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
   find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
   find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
@@ -113,13 +113,19 @@ elif [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
-  echo "Setting up for Apache user: $APACHE_USER"
+  printf '%s\n' "Setting up for Apache user: $APACHE_USER"
   chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
   chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-echo '# Update webfiles daily
-30 3 * * * root ping -c 2 1.1.1.1 &>/dev/null && bash -c "$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
-' >/etc/cron.d/static-website
+printf '%s\n' "Setting up cron"
+cat <<EOF | tee /etc/cron.d/static-website &>/dev/null
+# Update webfiles daily
+30 3 * * * root ping -c 2 1.1.1.1 &>/dev/null && bash -c "\$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
+
+EOF
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Web assets has been setup"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # End
