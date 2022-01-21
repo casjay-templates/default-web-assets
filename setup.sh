@@ -49,18 +49,23 @@ else
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 echo "Setting up default files"
-if [ -f "/var/www/html/default/index.default.php" ]; then
-  rm -Rf "/var/www/html/default/index.default.php"
+if [ -d "/var/www/html/default" ]; then
+  [ -f "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
+  [ -f "/var/www/html/default/index.default.php" ] || rm -Rf "/var/www/html/default/index.default.php"
   ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
+  ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
 fi
-if [ -f "/var/www/html/unknown/index.default.php" ]; then
-  rm -Rf "/var/www/html/unknown/index.default.php"
-  ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.default.php"
+
+if [ -d "/var/www/html/unknown" ]; then
+  [ -f "/var/www/html/unknown/casjays-footer.php" ] || rm -Rf "/var/www/html/unknown/casjays-footer.php"
+  [ -f "/var/www/html/unknown/index.default.php" ] || rm -Rf "/var/www/html/unknown/index.unknown.php"
+  ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/unknown/index.unknown.php"
+  ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/unknown/casjays-footer.php"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
 echo "Setting last updated to: $UPDATED_MESSAGE"
-find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; #>/dev/null 2>&1
+find -L "$STATICDIR" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \;                      #>/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; #>/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix copyright year
