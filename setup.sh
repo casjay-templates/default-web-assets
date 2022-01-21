@@ -35,22 +35,32 @@ COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 if [ -d "$STATICDIR/.git" ]; then
   echo "Updating Web Assets in $STATICDIR"
   git -C "$STATICDIR" reset --hard &>/dev/null
-  git -C "$STATICDIR" pull -q
+  git -C "$STATICDIR" pull -q &>/dev/null
   if [ "$?" -ne 0 ]; then
     rm -Rf "$STATICDIR"
     echo "Cloning Default Web Assets to $STATICDIR"
-    git clone -q "$STATICREPO" "$STATICDIR"
+    git clone -q "$STATICREPO" "$STATICDIR" &>/dev/null
   fi
 else
   [ -d "$STATICDIR" ] && rm -Rf "$STATICDIR"
   echo "Cloning Default Web Assets to $STATICDIR"
-  git clone -q "$STATICREPO" "$STATICDIR"
+  git clone -q "$STATICREPO" "$STATICDIR" &>/dev/null
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+echo "Setting up default files"
+if [ -f "/var/www/html/default/index.default.php" ]; then
+  rm -Rf "/var/www/html/default/index.default.php"
+  ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
+fi
+if [ -f "/var/www/html/unknown/index.default.php" ]; then
+  rm -Rf "/var/www/html/unknown/index.default.php"
+  ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.default.php"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix copyright year
 echo "Setting copyright year to: $COPYRIGHT_YEAR"
-find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|Copyright.*.1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
-find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|Copyright.*.1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|Copyright 1999.*|'$COPYRIGHT_FOOTER'|g' {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|Copyright 1999.*|'$COPYRIGHT_FOOTER'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 echo "Setting domain name to: $STATICDOM"
@@ -83,16 +93,6 @@ elif [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
   find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
   find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
   find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
-fi
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-echo "Setting up default files"
-if [ -f "/var/www/html/default/index.default.php" ]; then
-  rm -Rf "/var/www/html/default/index.default.php"
-  ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
-fi
-if [ -f "/var/www/html/unknown/index.default.php" ]; then
-  rm -Rf "/var/www/html/unknown/index.default.php"
-  ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.default.php"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
