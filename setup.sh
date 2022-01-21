@@ -23,6 +23,7 @@ HOME="${USER_HOME:-${HOME}}"
 GET_WEB_USER="$(ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1 | grep '^' || echo '')"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
+CURR_IP="$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')"
 STATICDOM="${STATICDOM:-$HOSTNAME}"
 STATICSITE="${STATICSITE:-static.casjay.net}"
 STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
