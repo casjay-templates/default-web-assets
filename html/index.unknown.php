@@ -30,7 +30,7 @@
     <br><br>
     Linux OsVer: <?php echo shell_exec('cat /etc/casjaysdev/updates/versions/osversion.txt'); ?><br />
     ConfigVer: <?php echo shell_exec('cat /etc/casjaysdev/updates/versions/configs.txt'); ?> <br />
-    Last updated on: REPLACE_LAST_UPDATED_ON_MESSAGE
+    REPLACE_LAST_UPDATED_ON_MESSAGE
     <br><br>
     Powered by a Redhat based system<br>
     <a href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg"> </a><br>
