@@ -29,6 +29,8 @@ STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets
 STATICDIR="${STATICDIR:-/usr/share/httpd}"
 STATICWEB="${STATICWEB:-/var/www}"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
+COPYRIGHT_YEAR="$(date +'%Y')"
+COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   echo "Updating Web Assets in $STATICDIR"
@@ -45,14 +47,22 @@ else
   git clone -q "$STATICREPO" "$STATICDIR"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Fix copyright year
+echo "Setting copyright year to: $COPYRIGHT_YEAR"
+find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|Copyright.*.1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i "s|Copyright.*.1999.*|$COPYRIGHT_FOOTER|g" {} \; >/dev/null 2>&1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 echo "Setting domain name to: $STATICDOM"
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
 echo "Setting static dir to: $STATICWEB"
 find "$STATICDIR" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
+find "$STATICWEB" -not -path "./git/*" -type f -iname "*.php" -iname ".*html" -iname "*.md" -iname "*.css" -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix permissions
 echo "Fixing permissions"
