@@ -96,6 +96,8 @@ find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".
 printf '%s\n' "Setting static dir to: $STATICWEB"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >/dev/null 2>&1
+find -L "$STATICDIR" -not -path "./git/*" -type f \( -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICWEB'|g' {} \; >/dev/null 2>&1
+find -L "$STATICWEB" -not -path "./git/*" -type f \( -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICWEB'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix permissions
 printf '%s\n' "Fixing permissions"
