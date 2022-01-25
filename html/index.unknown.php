@@ -2,8 +2,8 @@
 <html>
 
 <head>
-  <?php include "$_SERVER['SERVER_NAME']/default-html/default-header.php";?>
-  <?php include "$_SERVER['SERVER_NAME']/default-html/casjays-header.php";?>
+  <?php include "REPLACE_STATICDIR/default-html/default-header.php";?>
+  <?php include "REPLACE_STATICDIR/default-html/casjays-header.php";?>
     <meta name="robots" content="index, follow" />
   <link rel="icon" href="/default-icons/favicon.png"  type="image/icon png">
   <title>Domain Doesn't Exist</title>
@@ -33,7 +33,7 @@
   </div>
   <!-- Begin Casjays Developments Footer -->
   <center>
-    <?php include "$_SERVER['SERVER_NAME']/default-html/casjays-footer.php";?>
+    <?php include "REPLACE_STATICDIR/default-html/casjays-footer.php";?>
   </center>
   <!-- End Casjays Developments Footer -->
 </body>
