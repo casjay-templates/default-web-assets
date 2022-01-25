@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php include "/default-html/default-header.php";?>
-  <?php include "/default-html/casjays-header.php";?>
+  <?php include "$_SERVER['SERVER_NAME']/default-html/default-header.php";?>
+  <?php include "$_SERVER['SERVER_NAME']/default-html/casjays-header.php";?>
   <meta name="generator" content="CasjaysDev">
   <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -45,7 +45,7 @@
 
   <center>
     <!-- Begin Casjays Developments Footer -->
-    <?php include "/default-html/casjays-footer.php";?>
+    <?php include "$_SERVER['SERVER_NAME']/default-html/casjays-footer.php";?>
   </center>
   <!-- End Casjays Developments Footer -->
 </body>
