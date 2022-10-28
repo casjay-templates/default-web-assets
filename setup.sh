@@ -23,16 +23,16 @@ HOME="${USER_HOME:-${HOME}}"
 GET_WEB_USER="$(ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1 | grep '^' || echo '')"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
-CURR_IP="$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')"
-STATICDOM="${STATICDOM:-$HOSTNAME}"
-STATICSITE="${STATICSITE:-static.casjay.net}"
-STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
-STATICDIR="${STATICDIR:-/usr/share/httpd}"
-STATICWEB="${STATICWEB:-/var/www}"
-APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_YEAR="$(date +'%Y')"
+STATICDOM="${STATICDOM:-$HOSTNAME}"
+STATICWEB="${STATICWEB:-/var/www}"
+STATICDIR="${STATICDIR:-/usr/share/httpd}"
+STATICSITE="${STATICSITE:-static.casjay.net}"
+APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
+STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
+CURR_IP="${CURR_IP:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR"
@@ -59,7 +59,6 @@ if [ -d "/var/www/html/default" ]; then
   ln -sf "/usr/share/httpd/error/default-header.php" "/var/www/html/default/default-header.php"
   ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
   ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
-
 fi
 
 if [ -d "/var/www/html/unknown" ]; then
@@ -129,7 +128,7 @@ fi
 printf '%s\n' "Setting up cron"
 cat <<EOF | tee /etc/cron.d/static-website &>/dev/null
 # Update webfiles daily
-30 3 * * * root ping -c 2 1.1.1.1 &>/dev/null && bash -c "\$(curl -LSs https://github.com/casjay-templates/default-web-assets/raw/main/setup.sh)" &>/var/log/static-website.log 
+30 3 * * * root ping -c 2 1.1.1.1 &>/dev/null && bash -c "\$(curl -LSs "$STATICREPO/raw/main/setup.sh")" &>/var/log/static-website.log 
 
 EOF
 

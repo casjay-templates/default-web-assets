@@ -4,7 +4,7 @@
 <!-- Begin Casjays Developments Footer -->
 Copyright 1999 - 2020
 <br />
-<a href="https://casjay.net" target="_blank">Casjays Developments</a> and <a href="https://jason.malaks.us" target="_blank">Jason M. Hempstead-Malak</a><br />
+<a href="https://casjay.net" target="_blank">Casjays Developments</a> and <a href="https://malaks-us.github.io/jason" target="_blank">Jason M. Hempstead-Malak</a><br />
 Hosting by <a href="https://casjay.net/hosting" target="_blank">Casjays Developments: Hosting</a><br />
 and powered by <a href="https://casjaysdev.com" target="_blank">CasjaysDev.com</a><br /><br />
 <a href="https://www.patreon.com/casjay" target="_blank"><img src="https://img.shields.io/badge/patreon-donate-orange.svg" border="0" alt="Casjays Patreon Page"></a>
