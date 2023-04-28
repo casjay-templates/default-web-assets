@@ -50,8 +50,8 @@ export MANPATH
 MANCGI='/cgi-bin/man.cgi'
 
 # The URL of the two images :
-DOT=/default-images/doty.gif
-PAGES=/default-images/pages.gif
+DOT=/default-icons/doty.gif
+PAGES=/default-icons/pages.gif
 
 ### END OF CONFIGURATION SECTION ###############################################
 
@@ -66,7 +66,8 @@ if [ $# -eq 2 ] ; then
     read a
 
     COMMAND=`echo $a | sed 's/command=\(.*\)&.*/\1/'`
-    SECTION=`echo $a | sed 's/command=.*&section=\(.*\)/\1/'`
+    SECTION=`echo $a | sed 's/command=.*&section=\(.*\)
+/\1/'`
 
     if [ $SECTION = "ANY" ] ; then
 	SECTION=""
@@ -102,8 +103,8 @@ s/\([0-9A-z][-,0-9A-z]*\)-\n\(  *\)\([0-9A-z][-,0-9A-z]*([1-9][A-z]*)\)/\1\3\
 s/\([0-9A-z][-,0-9A-z]*\)-\n\(  *\)\([0-9A-z][-,0-9A-z]*([1-9][A-z]*)\)/\1\3\
 \2/
 }' \
-	  -e 's/</«/g' \
-	  -e 's/>/»/g' \
+	  -e 's/</ï¿½/g' \
+	  -e 's/>/ï¿½/g' \
    \
 	  -e '/^[A-Z]/s/.//g' \
 	  -e 's/^[A-Z][ ,A-Z]*$/<H2>&<\/H2>/' \
@@ -127,11 +128,14 @@ s/\([0-9A-z][-,0-9A-z]*\)-\n\(  *\)\([0-9A-z][-,0-9A-z]*([1-9][A-z]*)\)/\1\3\
    \
 	  -e "s#<b>+<\/b>#<IMG SRC=$DOT>#" \
    \
-          -e 's/«/\&lt;/g' \
-          -e 's/»/\&gt;/g' \
+          -e 's/ï¿½/\&lt;/g' \
+          -e 's/ï¿½/\&gt;/g' \
    \
-          -e '1s/^/<PRE>/' \
-          -e '$s/$/<\/PRE>/' | \
+          -e '1s/^/<PRE>
+/' \
+          -e '$s/$/
+<\/PRE>
+/' | \
 awk '/^$/     { if(!blank) { print; blank=1 } }
      /^..*$/  { print; blank=0 }'
 

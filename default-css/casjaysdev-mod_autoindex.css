@@ -1,0 +1,18 @@
+BODY {
+  background-color: #333;
+  color: #fff;
+  background-image: url("https://casjaysdev-sites.github.io/static/default-icons/bkg.png");
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid;
+  text-align: left;
+  padding: 8px;
+}

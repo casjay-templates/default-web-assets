@@ -89,15 +89,15 @@ our $home_text = "";
 our $site_footer = "";
 
 # URI of stylesheets
-our @stylesheets = ("/default-css/gitweb/default.css");
+our @stylesheets = ("/css/gitweb/default.css");
 # URI of a single stylesheet, which can be overridden in GITWEB_CONFIG.
 our $stylesheet = undef;
 # URI of GIT logo (72x27 size)
-our $logo = "/default-icons/git-logo.png";
+our $logo = "/icons/git-logo.png";
 # URI of GIT favicon, assumed to be image/png type
-our $favicon = "/default-icons/git-favicon.png";
+our $favicon = "/icons/git-favicon.png";
 # URI of gitweb.js (JavaScript code for gitweb)
-our $javascript = "/default-js/gitweb.js";
+our $javascript = "/js/gitweb.js";
 
 # URI and label (title) of GIT logo link
 #our $logo_url = "http://www.kernel.org/pub/software/scm/git/docs/";

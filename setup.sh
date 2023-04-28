@@ -107,16 +107,16 @@ find -L "$STATICWEB" -not -path "./git/*" -type f \( -o -iname "*.sh" -o -iname 
 if [ "$(command -v pacman >/dev/null 2>&1)" ]; then
   printf '%s\n' "Setting up for Arch based distros"
   find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >/dev/null 2>&1
-  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/default-icons/powered_by_archlinux.jpg"|g' {} \; >/dev/null 2>&1
+  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >/dev/null 2>&1
   find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >/dev/null 2>&1
-  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/default-icons/powered_by_archlinux.jpg"|g' {} \; >/dev/null 2>&1
+  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >/dev/null 2>&1
 #### Change for debian/ubuntu
 elif [ "$(command -v apt-get >/dev/null 2>&1)" ]; then
   printf '%s\n' "Setting up for Debian based distros"
   find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
-  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
+  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
   find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >/dev/null 2>&1
-  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/default-icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
+  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >/dev/null 2>&1
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
