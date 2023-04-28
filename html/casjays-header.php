@@ -35,8 +35,8 @@
 
   <link rel="stylesheet" type="text/css" href="/default-css/casjaysdev.css" />
 
-  <script src="htps://static.casjay.net/default-js/errorpages/isup.js"></script>
-  <script src="https://static.casjay.net/default-js/errorpages/homepage.js"></script>
-  <script src="https://static.casjay.net/default-js/errorpages/loaddomain.js"></script>
+  <script src="htps://https://casjaysdev-sites.github.io/static/default-js/errorpages/isup.js"></script>
+  <script src="https://casjaysdev-sites.github.io/static/default-js/errorpages/homepage.js"></script>
+  <script src="https://casjaysdev-sites.github.io/static/default-js/errorpages/loaddomain.js"></script>
   <script src="https://cdn.passprotect.io/passprotect.min.js"></script>
 </head>

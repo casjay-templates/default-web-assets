@@ -27,12 +27,12 @@ COPYRIGHT_YEAR="$(date +'%Y')"
 STATICDOM="${STATICDOM:-$HOSTNAME}"
 STATICWEB="${STATICWEB:-/var/www}"
 STATICDIR="${STATICDIR:-/usr/share/httpd}"
-STATICSITE="${STATICSITE:-static.casjay.net}"
+STATICSITE="${STATICSITE:-https://casjaysdev-sites.github.io/static}"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
 STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
-CURR_IP="${CURR_IP:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
+CURRENT_IP_4="${CURRENT_IP_4:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR"
@@ -87,9 +87,9 @@ find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".
 # Fix domain name
 printf '%s\n' "Setting domain name to: $STATICDOM"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
-find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
+find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|https://casjaysdev-sites.github.io/static|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
-find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|static.casjay.net|'$STATICSITE'|g' {} \; >/dev/null 2>&1
+find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|https://casjaysdev-sites.github.io/static|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
 printf '%s\n' "Setting static dir to: $STATICWEB"
