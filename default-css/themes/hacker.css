@@ -90,7 +90,7 @@ video {
 body {
   margin: 0;
   padding: 0;
-  background: #151515 url('https://REPLACE_STATIC_HOSTNAME/assets/images/bkg.png') 0 0;
+  background: #151515 url('https://REPLACE_STATIC_HOSTNAME/images//bkg.png') 0 0;
   color: #eaeaea;
   font-size: 16px;
   line-height: 25px;
@@ -353,7 +353,7 @@ dt {
 }
 
 ul li {
-  list-style-image: url('https://REPLACE_STATIC_HOSTNAME/assets/images/bullet.png');
+  list-style-image: url('https://REPLACE_STATIC_HOSTNAME/images//bullet.png');
 }
 
 blockquote {
@@ -436,7 +436,7 @@ hr {
 
 .btn-github .icon {
   opacity: 0.6;
-  background: url('https://REPLACE_STATIC_HOSTNAME/assets/images/blacktocat.png') 0 0 no-repeat;
+  background: url('https://REPLACE_STATIC_HOSTNAME/images//blacktocat.png') 0 0 no-repeat;
 }
 
 a {
