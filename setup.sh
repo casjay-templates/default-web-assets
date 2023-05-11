@@ -168,8 +168,10 @@ EOF
   systemctl is-enabled nginx 2>&1 | grep -q enabled && systemctl restart mginx &>/dev/null
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Creating symlinks"
-builtin cd "$STATICDIR" && for l in css error fonts html icons js; do [ -e "$l" ] || { [ -d "$default-$l" ] && ln -sf "default-$l" "$l"; }; done || false
+cd "$STATICDIR" && printf '%s\n' "Creating symlinks" &&
+  for l in css error fonts html icons js; do
+    [ -e "$l" ] || { [ -d "$default-$l" ] && ln -sf "default-$l" "$l"; }
+  done || false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Web assets has been setup"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
