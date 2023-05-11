@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
