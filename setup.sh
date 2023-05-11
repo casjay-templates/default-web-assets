@@ -140,6 +140,7 @@ cat <<EOF | tee /etc/cron.d/static-website &>/dev/null
 
 EOF
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "/etc/nginx/global.d/static.conf"
 if [ -d "/etc/nginx/global.d" ]; then
   cat <<EOF >"/etc/nginx/global.d/static.conf"
 location ^~ /error/ { alias $STATICDIR/error; }
