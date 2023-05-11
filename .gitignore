@@ -93,3 +93,11 @@ $RECYCLE.BIN/
 
 # ignore .env
 .env
+
+# ignore created symlinks
+css/
+error/
+fonts/
+html/
+icons/
+js/
