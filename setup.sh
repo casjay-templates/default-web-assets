@@ -20,19 +20,27 @@ HOME="${USER_HOME:-${HOME}}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #set opts
-GET_WEB_USER="$(ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1 | grep '^' || echo '')"
+GET_WEB_USER="$(grep -REi 'apache|httpd|www-data|nginx' /etc/passwd | head -n1 | cut -d: -f1 || false)"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
 STATICDOM="${STATICDOM:-$HOSTNAME}"
 STATICWEB="${STATICWEB:-/var/www}"
 STATICDIR="${STATICDIR:-/usr/share/httpd}"
-STATICSITE="${STATICSITE:-https://casjaysdev-sites.github.io/static}"
+STATICSITE="${STATICSITE:-$HOSTNAME}"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
 STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
 CURRENT_IP_4="${CURRENT_IP_4:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if [ -f "$STATICDIR/.env" ]; then
+  . "$STATICDIR/.env"
+else
+  echo "# Settings for $APPNAME" >"$STATICDIR/.env"
+  echo "STATICSITE=\"$STATICSITE\"" >>"$STATICDIR/.env"
+  echo "APACHE_USER=\"$APACHE_USER\"" >>"$STATICDIR/.env"
+fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR"
@@ -51,23 +59,23 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Setting up default files"
 if [ -d "/var/www/html/default" ]; then
-  [ -f "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
-  [ -f "/var/www/html/default/casjays-header.php" ] || rm -Rf "/var/www/html/default/casjays-header.php"
-  [ -f "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
-  [ -f "/var/www/html/default/index.default.php" ] || rm -Rf "/var/www/html/default/index.default.php"
+  [ -e "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
+  [ -e "/var/www/html/default/casjays-header.php" ] || rm -Rf "/var/www/html/default/casjays-header.php"
+  [ -e "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
+  [ -e "/var/www/html/default/index.default.php" ] || rm -Rf "/var/www/html/default/index.default.php"
   ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
-  ln -sf "/usr/share/httpd/error/default-header.php" "/var/www/html/default/default-header.php"
+  ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default-header.php"
   ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
   ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
 fi
 
 if [ -d "/var/www/html/unknown" ]; then
-  [ -f "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
-  [ -f "/var/www/html/unknown/casjays-header.php" ] || rm -Rf "/var/www/html/unknown/casjays-header.php"
-  [ -f "/var/www/html/unknown/casjays-footer.php" ] || rm -Rf "/var/www/html/unknown/casjays-footer.php"
-  [ -f "/var/www/html/unknown/index.unknown.php" ] || rm -Rf "/var/www/html/unknown/index.unknown.php"
+  [ -e "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
+  [ -e "/var/www/html/unknown/casjays-header.php" ] || rm -Rf "/var/www/html/unknown/casjays-header.php"
+  [ -e "/var/www/html/unknown/casjays-footer.php" ] || rm -Rf "/var/www/html/unknown/casjays-footer.php"
+  [ -e "/var/www/html/unknown/index.unknown.php" ] || rm -Rf "/var/www/html/unknown/index.unknown.php"
   ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.unknown.php"
-  ln -sf "/usr/share/httpd/error/default-header.php" "/var/www/html/unknown/default-header.php"
+  ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/unknown/default-header.php"
   ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/unknown/casjays-header.php"
   ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/unknown/casjays-footer.php"
 fi
