@@ -33,7 +33,7 @@ Powered by a Redhat based system<br>
 
 <center>
 <!-- Begin Casjays Developments Footer -->
-<?php include "https://casjaysdev-sites.github.io/static/casjays-footer.php"; ?>
+<?php include "https://REPLACE_STATIC_HOSTNAME/casjays-footer.php"; ?>
 </center>
 <!-- End Casjays Developments Footer -->
 </body>

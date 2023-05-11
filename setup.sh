@@ -95,9 +95,9 @@ find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".
 # Fix domain name
 printf '%s\n' "Setting domain name to: $STATICDOM"
 find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
-find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|https://casjaysdev-sites.github.io/static|'$STATICSITE'|g' {} \; >/dev/null 2>&1
+find -L "$STATICDIR" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATIC_HOSTNAME|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >/dev/null 2>&1
-find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|https://casjaysdev-sites.github.io/static|'$STATICSITE'|g' {} \; >/dev/null 2>&1
+find -L "$STATICWEB" -not -path "./git/*" -type f \( -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATIC_HOSTNAME|'$STATICSITE'|g' {} \; >/dev/null 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
 printf '%s\n' "Setting static dir to: $STATICWEB"
@@ -139,7 +139,33 @@ cat <<EOF | tee /etc/cron.d/static-website &>/dev/null
 30 3 * * * root ping -c 2 1.1.1.1 &>/dev/null && bash -c "\$(curl -LSs "$STATICREPO/raw/main/setup.sh")" &>/var/log/static-website.log 
 
 EOF
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if [ -d "/etc/nginx/conf.d" ]; then
+  cat <<EOF >"/etc/nginx/conf.d/$STATICSITE"
+location ^~ /error/ { alias $STATICDIR/error; }
+location ^~ /images/ { alias $STATICDIR/images; }
+location ^~ /cgi-bin/ { alias $STATICDIR/cgi-bin; }
+location ^~ /default-js/ { alias $STATICDIR/default-js; }
+location ^~ /default-css/ { alias $STATICDIR/default-css; }
+location ^~ /default-html/ { alias $STATICDIR/default-html; }
+location ^~ /default-error/ { alias $STATICDIR/default-error; }
+location ^~ /default-fonts/ { alias $STATICDIR/default-fonts; }
+location ^~ /default-icons/ { alias $STATICDIR/default-icons; }
+location ^~ /favicon.ico { alias $STATICDIR/default-icons/favicon.png; } 
+location ^~ /health { alias $STATICDIR/default-html/status.txt; } 
+location ^~ /health/txt { alias $STATICDIR/default-html/status.txt; } 
+location ^~ /health/json { alias $STATICDIR/default-html/status.json; } 
+error_page   403  =  /default-error/403.html;
+error_page   404  =  /default-error/404.html;
+error_page   418  =  /default-error/418.html;
+error_page   500  =  /default-error/500.html;
+error_page   502  =  /default-error/502.html;
+error_page   503  =  /default-error/503.html;
+error_page   504  =  /default-error/504.html;
 
+EOF
+  systemctl is-enabled nginx 2>&1 | grep -q enabled && systemctl restart mginx &>/dev/null
+fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Web assets has been setup"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

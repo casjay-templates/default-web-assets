@@ -48,7 +48,7 @@ body {
   font-family: arial, verdana, helvetica, sans-serif;
   font-size: 12px;
   border: 1px solid #ccd7e0;
-  background-image: url(https://casjaysdev-sites.github.io/static/default-icons/other/button.gif);
+  background-image: url(https://REPLACE_STATIC_HOSTNAME/default-icons/other/button.gif);
 }
 
 th {
