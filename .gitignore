@@ -95,9 +95,9 @@ $RECYCLE.BIN/
 .env
 
 # ignore created symlinks
-css/
-error/
-fonts/
-html/
-icons/
-js/
+css
+error
+fonts
+html
+icons
+js
