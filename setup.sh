@@ -140,8 +140,8 @@ cat <<EOF | tee /etc/cron.d/static-website &>/dev/null
 
 EOF
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-if [ -d "/etc/nginx/conf.d" ]; then
-  cat <<EOF >"/etc/nginx/conf.d/static.conf"
+if [ -d "/etc/nginx/global.d" ]; then
+  cat <<EOF >"/etc/nginx/global.d/static.conf"
 location ^~ /error/ { alias $STATICDIR/error; }
 location ^~ /images/ { alias $STATICDIR/images; }
 location ^~ /cgi-bin/ { alias $STATICDIR/cgi-bin; }
