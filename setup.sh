@@ -46,25 +46,25 @@ else
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
-  printf '%s\n' "Updating Web Assets in $STATICDIR"
+  printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
   git -C "$STATICDIR" reset --hard &>>"$LOG_FILE"
   git -C "$STATICDIR" pull -q &>>"$LOG_FILE"
   if [ "$?" -ne 0 ]; then
+    printf '%s\n' "Cloning Default Web Assets to $STATICDIR" | tee -a "$LOG_FILE"
     rm -Rf "$STATICDIR"
-    printf '%s\n' "Cloning Default Web Assets to $STATICDIR"
     git clone -q "$STATICREPO" "$STATICDIR" &>>"$LOG_FILE"
   fi
 else
+  printf '%s\n' "Cloning Default Web Assets to $STATICDIR" | tee -a "$LOG_FILE"
   [ -d "$STATICDIR" ] && rm -Rf "$STATICDIR"
-  printf '%s\n' "Cloning Default Web Assets to $STATICDIR"
   git clone -q "$STATICREPO" "$STATICDIR" &>>"$LOG_FILE"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Creating the directories"
+printf '%s\n' "Creating the directories" | tee -a "$LOG_FILE"
 [ -d "/var/www/html/default" ] || mkdir -p "/var/www/html/default"
 [ -d "/var/www/html/unknown" ] || mkdir -p "/var/www/html/unknown"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Setting up default server files"
+printf '%s\n' "Setting up default server files" | tee -a "$LOG_FILE"
 [ -e "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
 [ -e "/var/www/html/default/casjays-header.php" ] || rm -Rf "/var/www/html/default/casjays-header.php"
 [ -e "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
@@ -74,7 +74,7 @@ ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default
 ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
 ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Setting up unknown server files"
+printf '%s\n' "Setting up unknown server files" | tee -a "$LOG_FILE"
 [ -e "/var/www/html/unknown/default-header.php" ] || rm -Rf "/var/www/html/unknown/default-header.php"
 [ -e "/var/www/html/unknown/casjays-header.php" ] || rm -Rf "/var/www/html/unknown/casjays-header.php"
 [ -e "/var/www/html/unknown/casjays-footer.php" ] || rm -Rf "/var/www/html/unknown/casjays-footer.php"
@@ -86,29 +86,29 @@ ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/unknown/casjays
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
 printf '%s\n' "Setting last updated to: $UPDATED_MESSAGE" | tee -a "$LOG_FILE"
-find -L "$STATICDIR" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix copyright year
 printf '%s\n' "Setting copyright year to: $COPYRIGHT_YEAR" | tee -a "$LOG_FILE"
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 printf '%s\n' "Setting domain name to: $STATICDOM" | tee -a "$LOG_FILE"
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATIC_HOSTNAME|'$STATICSITE'|g' {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATIC_HOSTNAME|'$STATICSITE'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATIC_HOSTNAME|'$STATICSITE'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATIC_HOSTNAME|'$STATICSITE'|g' {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
 printf '%s\n' "Setting static dir to: $STATICWEB" | tee -a "$LOG_FILE"
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
+find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix permissions
 printf '%s\n' "Fixing permissions" | tee -a "$LOG_FILE"
@@ -118,17 +118,17 @@ find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.sh" -o -iname 
 #### Change for archlinux
 if [ "$(command -v pacman >>"$LOG_FILE" 2>&1)" ]; then
   printf '%s\n' "Setting up for Arch based distros" | tee -a "$LOG_FILE"
-  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >>"$LOG_FILE" 2>&1
-  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
-  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >>"$LOG_FILE" 2>&1
-  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
 #### Change for debian/ubuntu
 elif [ "$(command -v apt-get >>"$LOG_FILE" 2>&1)" ]; then
   printf '%s\n' "Setting up for Debian based distros" | tee -a "$LOG_FILE"
-  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >>"$LOG_FILE" 2>&1
-  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
-  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >>"$LOG_FILE" 2>&1
-  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname ".*html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >>"$LOG_FILE" 2>&1
+  find -L "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
@@ -138,7 +138,7 @@ if [ -n "$APACHE_USER" ]; then
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Setting up cron" | tee -a "$LOG_FILE"
-cat <<EOF | tee /etc/cron.d/static-website &>>"$LOG_FILE"
+cat <<EOF | tee /etc/cron.d/static-website &>"/dev/null"
 # Update webfiles daily
 30 3 * * * root ping -c 2 1.1.1.1 &>>"$LOG_FILE" && bash -c "\$(curl -LSs "$STATICREPO/raw/main/setup.sh")" &>/var/log/static-website.log 
 
