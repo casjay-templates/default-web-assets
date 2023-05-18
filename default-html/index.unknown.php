@@ -9,7 +9,11 @@
 
     <link rel="shortcut icon" href="https://avatars2.githubusercontent.com/u/62282596?s=200&v=4" />
 
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700,400italic,700italic"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
       rel="stylesheet"
@@ -18,6 +22,12 @@
 
     <link rel="stylesheet" type="text/css" href="/default-css/hacker.css" />
     <link rel="stylesheet" type="text/css" href="/default-css/casjaysdev.css" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
+    />
 
     <link
       rel="stylesheet"
@@ -33,7 +43,11 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js" crossorigin="anonymous" defer></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
       integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
@@ -66,8 +80,8 @@
     <div class="c5">
       <br />
       <?php
-      echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>";
-      echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR />"; ?> <br /><br />
+      echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR />";
+      ?> <br /><br />
       Linux OsVer:
       <?php echo shell_exec('cat /etc/redhat-release'); ?><br />
       ConfigVer:
@@ -76,13 +90,15 @@
       ); ?>
       <br /><br />
       Powered by a Redhat based system<br />
-      <a href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg" /> </a><br />
+      <a href="https://redhat.com">
+        <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg" /> </a
+      ><br />
       <br /><br /><br /><br /><br />
     </div>
-    <!-- Begin Casjays Developments Footer -->
     <center>
+      <!-- Begin Casjays Developments Footer -->
       <?php include "https://REPLACE_STATIC_HOSTNAME/default-html/casjays-footer.php"; ?>
+      <!-- End Casjays Developments Footer -->
     </center>
-    <!-- End Casjays Developments Footer -->
   </body>
 </html>
