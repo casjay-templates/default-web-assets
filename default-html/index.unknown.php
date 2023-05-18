@@ -75,12 +75,15 @@
       <h2>UMMMMM</h2>
       <br />
       This site doesn't seem to exist<br />
-      <br /><br /><br /><br /><br />
+      <br /><br />
+      <img alt="error" height="400" width="400" src="/default-error/images/oops.gif" />
+      <br /><br /><br />
     </div>
     <div class="c5">
       <br />
       <?php
-      echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR />";
+      echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>";
+      echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR />";
       ?> <br /><br />
       Linux OsVer:
       <?php echo shell_exec('cat /etc/redhat-release'); ?><br />
