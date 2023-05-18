@@ -16,6 +16,7 @@
       type="text/css"
     />
 
+    <link rel="stylesheet" type="text/css" href="/default-css/hacker.css" />
     <link rel="stylesheet" type="text/css" href="/default-css/casjaysdev.css" />
 
     <link
@@ -65,13 +66,14 @@
     <div class="c5">
       <br />
       <?php
-echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR />"; ?> <br /><br />
+      echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>";
+      echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<BR />"; ?> <br /><br />
       Linux OsVer:
       <?php echo shell_exec('cat /etc/redhat-release'); ?><br />
       ConfigVer:
       <?php echo shell_exec(
-  'cat /etc/casjaysdev/updates/versions/configs.txt'
-); ?>
+        'cat /etc/casjaysdev/updates/versions/configs.txt'
+      ); ?>
       <br /><br />
       Powered by a Redhat based system<br />
       <a href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg" /> </a><br />
