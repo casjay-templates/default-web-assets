@@ -57,28 +57,29 @@ else
   git clone -q "$STATICREPO" "$STATICDIR" &>/dev/null
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Setting up default files"
-if [ -d "/var/www/html/default" ]; then
-  [ -e "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
-  [ -e "/var/www/html/default/casjays-header.php" ] || rm -Rf "/var/www/html/default/casjays-header.php"
-  [ -e "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
-  [ -e "/var/www/html/default/index.default.php" ] || rm -Rf "/var/www/html/default/index.default.php"
-  ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
-  ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default-header.php"
-  ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
-  ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
-fi
-
-if [ -d "/var/www/html/unknown" ]; then
-  [ -e "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
-  [ -e "/var/www/html/unknown/casjays-header.php" ] || rm -Rf "/var/www/html/unknown/casjays-header.php"
-  [ -e "/var/www/html/unknown/casjays-footer.php" ] || rm -Rf "/var/www/html/unknown/casjays-footer.php"
-  [ -e "/var/www/html/unknown/index.unknown.php" ] || rm -Rf "/var/www/html/unknown/index.unknown.php"
-  ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.unknown.php"
-  ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/unknown/default-header.php"
-  ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/unknown/casjays-header.php"
-  ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/unknown/casjays-footer.php"
-fi
+printf '%s\n' "Creating the directories"
+[ -d "/var/www/html/default" ] || mkdir -p "/var/www/html/default"
+[ -d "/var/www/html/unknown" ] || mkdir -p "/var/www/html/unknown"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Setting up default server files"
+[ -e "/var/www/html/default/default-header.php" ] || rm -Rf "/var/www/html/default/default-header.php"
+[ -e "/var/www/html/default/casjays-header.php" ] || rm -Rf "/var/www/html/default/casjays-header.php"
+[ -e "/var/www/html/default/casjays-footer.php" ] || rm -Rf "/var/www/html/default/casjays-footer.php"
+[ -e "/var/www/html/default/index.default.php" ] || rm -Rf "/var/www/html/default/index.default.php"
+ln -sf "/usr/share/httpd/html/index.default.php" "/var/www/html/default/index.default.php"
+ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default-header.php"
+ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
+ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Setting up unknown server files"
+[ -e "/var/www/html/unknown/default-header.php" ] || rm -Rf "/var/www/html/unknown/default-header.php"
+[ -e "/var/www/html/unknown/casjays-header.php" ] || rm -Rf "/var/www/html/unknown/casjays-header.php"
+[ -e "/var/www/html/unknown/casjays-footer.php" ] || rm -Rf "/var/www/html/unknown/casjays-footer.php"
+[ -e "/var/www/html/unknown/index.unknown.php" ] || rm -Rf "/var/www/html/unknown/index.unknown.php"
+ln -sf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.unknown.php"
+ln -sf "/usr/share/httpd/html/default-header.php" "/var/www/html/unknown/default-header.php"
+ln -sf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/unknown/casjays-header.php"
+ln -sf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/unknown/casjays-footer.php"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
 printf '%s\n' "Setting last updated to: $UPDATED_MESSAGE"
