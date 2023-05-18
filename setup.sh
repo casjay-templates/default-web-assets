@@ -92,9 +92,12 @@ find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*
 # Fix copyright year
 printf '%s\n' "Setting copyright year to: $COPYRIGHT_YEAR" | tee -a "$LOG_FILE"
 find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
 find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|Copyright 1999.*|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
-find -L "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" {} \; >>"$LOG_FILE" 2>&1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Setting copyright footer to: $COPYRIGHT_FOOTER" | tee -a "$LOG_FILE"
+for f in default-error/403.html default-error/404.html default-error/418.html default-error/500.html default-error/502.html default-error/503.html default-error/504.html default-html/nginx-proxy.html; do
+  sed -i "s|REPLACE_MYFOOTER_MESSAGE|$COPYRIGHT_FOOTER|g" "$STATICDIR/$f" >>"$LOG_FILE" 2>&1
+done
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 printf '%s\n' "Setting domain name to: $STATICDOM" | tee -a "$LOG_FILE"
