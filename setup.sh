@@ -49,7 +49,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
-  sudo -u $APACHE_USER bash -c 'git -C '$STATICDIR' reset --hard &>/dev/null;git -C '$STATICDIR' pull' -q &>>"$LOG_FILE"
+  sudo -u $APACHE_USER bash -c 'git -C '$STATICDIR' reset --hard -q;git -C '$STATICDIR' pull -q' &>>"$LOG_FILE"
   if [ "$?" -ne 0 ]; then
     printf '%s\n' "Cloning Default Web Assets to $STATICDIR" | tee -a "$LOG_FILE"
     rm -Rf "$STATICDIR"
