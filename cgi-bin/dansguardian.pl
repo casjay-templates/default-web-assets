@@ -44,8 +44,8 @@ print '<P>Your username, IP address, date, time and URL have been logged.';
 print '<P><table border=1 bgcolor="#FFEE00"><tr><td>You are seeing this error because the page you attempted<br>';
 print 'to access contains, or is labelled as containing, material that';
 print '<br>has been deemed inappropriate.</td></tr></table>';
-print '<P><table border=1 bgcolor="#44dd44"><tr><td>If you have any queries contact your <a href="mailto:admin@proxy.casjay.net?subject=Banned -IP-">Proxy Administrator</td></tr></table>';
-print '<P><font size=-3>Powered by <a href="http://proxy.casjay.net" target="_blank">Casjays Developments Proxy Server</a></font>';
+print '<P><table border=1 bgcolor="#44dd44"><tr><td>If you have any queries contact your <a href="mailto:admin@proxy.casjay.pro?subject=Banned -IP-">Proxy Administrator</td></tr></table>';
+print '<P><font size=-3>Powered by <a href="http://proxy.casjay.pro" target="_blank">Casjays Developments Proxy Server</a></font>';
 print '</center></BODY></HTML>';
 
 exit;

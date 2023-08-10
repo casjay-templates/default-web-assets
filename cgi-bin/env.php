@@ -6,7 +6,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ##@Version       :
 # @Author        : Jason
-# @Contact       : jason@casjaysdev.com
+# @Contact       : jason@casjaydns.com
 # @License       : WTFPL
 # @ReadME        : env --help
 # @Copyright     : Copyright (c) 2021, Casjays Developments

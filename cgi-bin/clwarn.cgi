@@ -72,7 +72,7 @@ print qq{
 	Origin: $source / $user
 	<p>
 	<hr>
-	<font color="blue"> Powered by <a href="https://proxy.casjay.net/">Casjays Developments Proxy</a>.</font>
+	<font color="blue"> Powered by <a href="https://proxy.casjay.pro/">Casjays Developments Proxy</a>.</font>
 	</div>
 };
 
