@@ -90,7 +90,7 @@ video {
 body {
   margin: 0;
   padding: 0;
-  background: #151515 url('https://REPLACE_STATIC_HOSTNAME/images//bkg.png') 0 0;
+  background: #151515 url('/default-images/bkg.png') 0 0;
   color: #eaeaea;
   font-size: 16px;
   line-height: 25px;
@@ -353,7 +353,7 @@ dt {
 }
 
 ul li {
-  list-style-image: url('https://REPLACE_STATIC_HOSTNAME/images//bullet.png');
+  list-style-image: url('/default-images/bullet.png');
 }
 
 blockquote {
@@ -407,7 +407,13 @@ hr {
 
 .btn {
   display: inline-block;
-  background: -webkit-linear-gradient(top, rgba(40, 40, 40, 0.3), rgba(35, 35, 35, 0.3) 50%, rgba(10, 10, 10, 0.3) 50%, rgba(0, 0, 0, 0.3));
+  background: -webkit-linear-gradient(
+    top,
+    rgba(40, 40, 40, 0.3),
+    rgba(35, 35, 35, 0.3) 50%,
+    rgba(10, 10, 10, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
   padding: 8px 18px;
   border-radius: 50px;
   border: 2px solid rgba(0, 0, 0, 0.7);
@@ -423,7 +429,13 @@ hr {
 }
 
 .btn:hover {
-  background: -webkit-linear-gradient(top, rgba(40, 40, 40, 0.6), rgba(35, 35, 35, 0.6) 50%, rgba(10, 10, 10, 0.8) 50%, rgba(0, 0, 0, 0.8));
+  background: -webkit-linear-gradient(
+    top,
+    rgba(40, 40, 40, 0.6),
+    rgba(35, 35, 35, 0.6) 50%,
+    rgba(10, 10, 10, 0.8) 50%,
+    rgba(0, 0, 0, 0.8)
+  );
 }
 
 .btn .icon {
@@ -436,7 +448,7 @@ hr {
 
 .btn-github .icon {
   opacity: 0.6;
-  background: url('https://REPLACE_STATIC_HOSTNAME/images//blacktocat.png') 0 0 no-repeat;
+  background: url('/default-images/blacktocat.png') 0 0 no-repeat;
 }
 
 a {

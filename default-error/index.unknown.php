@@ -67,7 +67,7 @@
     </div>
     <!-- Begin Casjays Developments Footer -->
     <center>
-      <?php include "https://REPLACE_STATIC_HOSTNAME/default-html/casjays-footer.php"; ?>
+      <?php include "/default-html/casjays-footer.php"; ?>
     </center>
     <!-- End Casjays Developments Footer -->
   </body>

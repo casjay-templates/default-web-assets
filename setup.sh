@@ -148,19 +148,21 @@ EOF
 printf '%s\n' "Creating /etc/nginx/global.d/static.conf" | tee -a "$LOG_FILE"
 if [ -d "/etc/nginx/global.d" ]; then
   cat <<EOF >"/etc/nginx/global.d/static.conf"
-location ^~ /error/ { alias $STATICDIR/error; }
-location ^~ /images/ { alias $STATICDIR/images; }
-location ^~ /cgi-bin/ { alias $STATICDIR/cgi-bin; }
-location ^~ /default-js/ { alias $STATICDIR/default-js; }
-location ^~ /default-css/ { alias $STATICDIR/default-css; }
-location ^~ /default-html/ { alias $STATICDIR/default-html; }
-location ^~ /default-error/ { alias $STATICDIR/default-error; }
-location ^~ /default-fonts/ { alias $STATICDIR/default-fonts; }
-location ^~ /default-icons/ { alias $STATICDIR/default-icons; }
+location ^~ /error/ { root $STATICDIR/error; }
+location ^~ /cgi-bin/ { root $STATICDIR/cgi-bin; }
+location ^~ /images/ { root $STATICDIR/default-images; }
+location ^~ /default-js/ { root $STATICDIR/default-js; }
+location ^~ /default-css/ { root $STATICDIR/default-css; }
+location ^~ /default-html/ { root $STATICDIR/default-html; }
+location ^~ /default-error/ { root $STATICDIR/default-error; }
+location ^~ /default-fonts/ { root $STATICDIR/default-fonts; }
+location ^~ /default-icons/ { root $STATICDIR/default-icons; }
+location ^~ /default-images/ { root $STATICDIR/default-images; }
 location ^~ /favicon.ico { alias $STATICDIR/default-icons/favicon.png; } 
-location ^~ /health { alias $STATICDIR/default-html/status.txt; } 
-location ^~ /health/txt { alias $STATICDIR/default-html/status.txt; } 
-location ^~ /health/json { alias $STATICDIR/default-html/status.json; } 
+location ^~ /health { alias $STATICDIR/default-health/status.txt; } 
+location ^~ /health/txt { alias $STATICDIR/default-health/status.txt; } 
+location ^~ /health/json { alias $STATICDIR/default-health/status.json; } 
+location ^~ /health/status { alias $STATICDIR/default-health/status.json; } 
 error_page   403  =  /default-error/403.html;
 error_page   404  =  /default-error/404.html;
 error_page   418  =  /default-error/418.html;

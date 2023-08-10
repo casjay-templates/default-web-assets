@@ -100,7 +100,7 @@
     </div>
     <center>
       <!-- Begin Casjays Developments Footer -->
-      <?php include "https://REPLACE_STATIC_HOSTNAME/default-html/casjays-footer.php"; ?>
+      <?php include "/default-html/casjays-footer.php"; ?>
       <!-- End Casjays Developments Footer -->
     </center>
   </body>
