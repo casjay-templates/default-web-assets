@@ -1,1 +1,1 @@
-$('#result').load('/default-html/casjays-footer.php');
+$('#result').load('https://REPLACE_STATIC_HOSTNAME/default-html/casjays-footer.php');
