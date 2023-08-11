@@ -116,16 +116,16 @@ elif [ "$(command -v apt-get >>"$LOG_FILE" 2>&1)" ]; then
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Copy default server files" | tee -a "$LOG_FILE"
-[ -e "/var/www/html/default/default-header.php" ] && rm -Rf "/var/www/html/default/default-header.php"
-[ -e "/var/www/html/default/casjays-header.php" ] && rm -Rf "/var/www/html/default/casjays-header.php"
-[ -e "/var/www/html/default/casjays-footer.php" ] && rm -Rf "/var/www/html/default/casjays-footer.php"
-cp -Rf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default-header.php"
-cp -Rf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
-cp -Rf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
+[ -e "$STATICWEB/default-html/default-header.php" ] && rm -Rf "$STATICWEB/html/default/default-header.php"
+[ -e "$STATICWEB/default-html/casjays-header.php" ] && rm -Rf "$STATICWEB/html/default/casjays-header.php"
+[ -e "$STATICWEB/default-html/casjays-footer.php" ] && rm -Rf "$STATICWEB/html/default/casjays-footer.php"
+cp -Rf "$STATICDIR/default-html/default-header.php" "$STATICWEB/html/default/default-header.php"
+cp -Rf "$STATICDIR/default-html/casjays-header.php" "$STATICWEB/html/default/casjays-header.php"
+cp -Rf "$STATICDIR/default-html/casjays-footer.php" "$STATICWEB/html/default/casjays-footer.php"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Copy unknown server files" | tee -a "$LOG_FILE"
-[ -e "/var/www/html/unknown/index.unknown.php" ] && rm -Rf "/var/www/html/unknown/index.unknown.php"
-cp -Rf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.unknown.php"
+[ -e "$STATICWEB/default-html/unknown/index.unknown.php" ] && rm -Rf "$STATICWEB/html/unknown/index.unknown.php"
+cp -Rf "$STATICDIR/default-html/index.unknown.php" "$STATICWEB/html/unknown/index.unknown.php"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cd "$STATICDIR" && printf '%s\n' "Creating symlinks" | tee -a "$LOG_FILE"
 for l in css error fonts html icons js images health; do
