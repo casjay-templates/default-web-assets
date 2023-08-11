@@ -65,18 +65,6 @@ printf '%s\n' "Creating the directories" | tee -a "$LOG_FILE"
 [ -d "/var/www/html/default" ] || mkdir -p "/var/www/html/default"
 [ -d "/var/www/html/unknown" ] || mkdir -p "/var/www/html/unknown"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Setting up default server files" | tee -a "$LOG_FILE"
-[ -e "/var/www/html/default/default-header.php" ] && rm -Rf "/var/www/html/default/default-header.php"
-[ -e "/var/www/html/default/casjays-header.php" ] && rm -Rf "/var/www/html/default/casjays-header.php"
-[ -e "/var/www/html/default/casjays-footer.php" ] && rm -Rf "/var/www/html/default/casjays-footer.php"
-cp -Rf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default-header.php"
-cp -Rf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
-cp -Rf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Setting up unknown server files" | tee -a "$LOG_FILE"
-[ -e "/var/www/html/unknown/index.unknown.php" ] && rm -Rf "/var/www/html/unknown/index.unknown.php"
-cp -Rf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.unknown.php"
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
 printf '%s\n' "Setting last updated to: $UPDATED_MESSAGE" | tee -a "$LOG_FILE"
 find "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i "s|REPLACE_LAST_UPDATED_ON_MESSAGE|$UPDATED_MESSAGE|g" {} \; >>"$LOG_FILE" 2>&1
@@ -127,15 +115,22 @@ elif [ "$(command -v apt-get >>"$LOG_FILE" 2>&1)" ]; then
   find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-if [ -n "$APACHE_USER" ]; then
-  printf '%s\n' "Setting up for Apache user: $APACHE_USER" | tee -a "$LOG_FILE"
-  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
-  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
-fi
+printf '%s\n' "Copy default server files" | tee -a "$LOG_FILE"
+[ -e "/var/www/html/default/default-header.php" ] && rm -Rf "/var/www/html/default/default-header.php"
+[ -e "/var/www/html/default/casjays-header.php" ] && rm -Rf "/var/www/html/default/casjays-header.php"
+[ -e "/var/www/html/default/casjays-footer.php" ] && rm -Rf "/var/www/html/default/casjays-footer.php"
+cp -Rf "/usr/share/httpd/html/default-header.php" "/var/www/html/default/default-header.php"
+cp -Rf "/usr/share/httpd/html/casjays-header.php" "/var/www/html/default/casjays-header.php"
+cp -Rf "/usr/share/httpd/html/casjays-footer.php" "/var/www/html/default/casjays-footer.php"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Copy unknown server files" | tee -a "$LOG_FILE"
+[ -e "/var/www/html/unknown/index.unknown.php" ] && rm -Rf "/var/www/html/unknown/index.unknown.php"
+cp -Rf "/usr/share/httpd/html/index.unknown.php" "/var/www/html/unknown/index.unknown.php"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 cd "$STATICDIR" && printf '%s\n' "Creating symlinks" | tee -a "$LOG_FILE"
-for l in css error fonts html icons js; do
-  [ -e "$l" ] || { [ -d "default-$l" ] && ln -sf "default-$l" "$l"; }
+for l in css error fonts html icons js images health; do
+  [ -e "$l" ] && rm -Rf "$l"
+  [ -d "default-$l" ] && ln -sf "default-$l" "$l"
 done || false
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Setting up cron" | tee -a "$LOG_FILE"
@@ -173,6 +168,12 @@ error_page   504  =  /default-error/504.html;
 
 EOF
   systemctl is-enabled nginx 2>&1 | grep -q enabled && systemctl restart nginx &>>"$LOG_FILE"
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if [ -n "$APACHE_USER" ]; then
+  printf '%s\n' "Setting up for Apache user: $APACHE_USER" | tee -a "$LOG_FILE"
+  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
+  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Web assets has been setup" | tee -a "$LOG_FILE"
