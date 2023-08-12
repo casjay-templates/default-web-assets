@@ -1,97 +1,121 @@
-<!-- Begin Footer -->
-<div id="footer" class="footer" align="center">
-  <br /><br /><br /><br /><br /><br /><br />
-  <!-- Begin Casjays Developments Footer -->
-  Copyright 1999 - 2020
-  <br />
-  <a href="https://casjay.pro" target="_blank">Casjays Developments</a> and
-  <a href="https://malaks-us.github.io/jason" target="_blank">Jason M. Hempstead-Malak</a><br />
-  Hosting by <a href="https://casjay.pro/hosting" target="_blank">Casjays Developments: Hosting</a><br />
-  and powered by <a href="https://casjaysdev.pro" target="_blank">CasjaysDev.com</a><br /><br />
-  <a href="https://www.patreon.com/casjay" target="_blank"
-    ><img src="https://img.shields.io/badge/patreon-donate-orange.svg" border="0" alt="Casjays Patreon Page"
-  /></a>
-  <a href="https://www.paypal.me/casjaysdev" target="_blank"
-    ><img src="https://img.shields.io/badge/Donate-PayPal-green.svg?casjay@paypal.com" alt="Casjays Paypal Page"
-  /></a>
-  <br /><br />
-  <a href="https://help.casjay.pro" target="_blank">CasjaysDev Support</a> |
-  <a href="https://bugs.casjay.pro" target="_blank">CasjaysDev Bugs</a> <br />
-  <a href="https://status.casjay.pro" target="_blank">System Status</a> |
-  <a href="https://servers.casjay.pro" target="_blank">Service Status</a> |
-  <a href="https://status.casjaysdev.pro" target="_blank">Complete Status</a> <br />
-  <a href="https://casjaysdev.pro/domains.html" target="_blank">Casjays Developments Domains</a>
-  <br /><br />
-  Casjays Developments privacy policy can be found at<br />
-  <a href="https://casjaysdev.pro/policy/" target="_blank">https://casjaysdev.pro/policy</a><br />
-  <br />
-  <br />
-  <!-- End Casjays Developments Footer -->
+        <br />
+        <hr />
+        <div class="footer footer-custom col-sm-12">
+          <!-- Begin Casjays Developments Footer -->
+          <div class="footer vh-100">
+            <div class="footer-custom fs-4">
+              <br />
+              <br />
+              <br />
+              <!-- Begin last updated -->
+              <span style="color: skyblue"> REPLACE_LAST_UPDATED_ON_MESSAGE </span>
+              <br />
+              <br />
+              <!-- End last updated -->
 
-  <!--Begin Statcounter Code -->
-  <script type="text/javascript">
-    var sc_project = 8585230;
-    var sc_invisible = 0;
-    var sc_security = 'ef07ac24';
-    var scJsHost = 'https:' == document.location.protocol ? 'https://secure.' : 'http://www.';
-    document.write(
-      '<sc' + "ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></" + 'script>',
-    );
-  </script>
-  <noscript
-    ><div class="statcounter">
-      <a title="web stats" href="http://statcounter.com/p8585230/summary/?guest=1" target="_blank"
-        ><img
-          class="statcounter"
-          src="//c.statcounter.com/8585230/0/ef07ac24/0/"
-          alt="web
-stats"
-      /></a></div
-  ></noscript>
-  <!-- End Statcounter Code -->
-  <br /><br />
+              <!-- begin legal block --->
+              <div class="legal">
+                REPLACE_MYFOOTER_MESSAGE
+                <br />
+                <a href="https://casjay.pro" target="_blank">Casjays Developments</a> and
+                <a href="https://malaks-us.github.io/jason" target="_blank">Jason M. Hempstead-Malak</a><br />
+                Hosting by <a href="https://casjay.pro/hosting" target="_blank">Casjays Developments: Hosting</a><br />
+                and powered by <a href="https://casjaysdev.pro" target="_blank">CasjaysDev.com</a>
+                <br />
+                <br />
+                <a href="https://www.patreon.com/casjay" target="_blank"
+                  ><img
+                    src="https://img.shields.io/badge/patreon-donate-orange.svg"
+                    border="0"
+                    alt="Casjays Patreon Page"
+                /></a>
+                <a href="https://www.paypal.me/casjaysdev" target="_blank"
+                  ><img
+                    src="https://img.shields.io/badge/Donate-PayPal-green.svg?casjay@yahoo.com"
+                    alt="Casjays Paypal Page"
+                /></a>
+                <br />
+                <br />
+                <a href="https://help.casjay.pro" target="_blank">CasjaysDev Support</a> |
+                <a href="https://bugs.casjay.pro" target="_blank">CasjaysDev Bugs</a> <br />
+                <a href="https://status.casjay.pro" target="_blank">System Status</a> |
+                <a href="https://servers.casjay.pro" target="_blank">Service Status</a> |
+                <a href="https://status.casjaysdev.pro" target="_blank">Complete Status</a>
+                <br />
+                <a href="https://casjaysdev.pro/domains.html" target="_blank">Casjays Developments Domains</a>
+                <br />
+                <br />
+                Casjays Developments privacy policy can be found at<br />
+                <a href="https://casjaysdev.pro/policy/" target="_blank">https://casjaysdev.pro/policy</a>
+                <br />
+              </div>
+              <!-- end legal block --->
 
-  <!-- Begin Google Track -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-936146-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-936146-1');
-  </script>
-  <!-- Eng Google Track -->
-  <br /><br />
+              <!-- begin engine block --->
+              <div class="text-center" style="color: royalblue">
+                <br />
+                Made with 💜💜💜💜💜💜 by
+                <br />
+                <a href="http://github.com/casjay" target="_blank" rel="noopener">Jason M. Hempstead (Casjay)</a>
+                <br />
+                This site is powered by an
+                <a href="https://github.com/casjay-templates/jekyll-site" target="_blank" rel="noopener">open source </a
+                >theme
+              </div>
+              <br />
+              <!-- end engine block --->
 
-  <!-- begin eu cookie block --->
-  <div class="text-center align-items-center fs-3">
-    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
-    <script>
-      window.cookieconsent.initialise({
-        palette: {
-          popup: {
-            background: '#64386b',
-            text: '#ffcdfd',
-          },
-          button: {
-            background: '#f8a8ff',
-            text: '#3f0045',
-          },
-        },
-        theme: 'edgeless',
-        content: {
-          message:
-            'This site uses cookie and in accordance with the EU GDPR<br />law this message is being displayed.<br />',
-          dismiss: 'dismiss',
-          link: 'CasjaysDev Privacy Policy',
-          href: 'https://casjaysdev.pro/policy',
-        },
-      });
-    </script>
-    <br />
-  </div>
-  <!-- end eu cookie block --->
-</div>
-<br /><br />
-<!-- End Footer -->
+              <!-- begin clock block --->
+              <div class="clock">
+                <br />
+                <br />
+                <iframe
+                  src="https://freesecure.timeanddate.com/clock/i7k2kmtc/n12/fn6/fs16/fc9ff/tc000/ftb/bas2/bat1/bacfff/pa8/tt0/tw1/th1/ta1/tb4"
+                  frameborder="0"
+                  width="212"
+                  height="56"
+                ></iframe>
+                <br />
+                <br />
+              </div>
+              <!-- end clock block --->
+
+              <!-- begin eu cookie block --->
+              <div class="text-center align-items-center fs-3">
+                <script
+                  src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
+                  data-cfasync="false"
+                ></script>
+                <script>
+                  window.cookieconsent.initialise({
+                    palette: {
+                      popup: {
+                        background: '#64386b',
+                        text: '#ffcdfd',
+                      },
+                      button: {
+                        background: '#f8a8ff',
+                        text: '#3f0045',
+                      },
+                    },
+                    theme: 'edgeless',
+                    content: {
+                      message:
+                        'This site uses cookie and in accordance with the EU GDPR<br />law this message is being displayed.<br />',
+                      dismiss: 'dismiss',
+                      link: 'CasjaysDev Privacy Policy',
+                      href: 'https://casjaysdev.pro/policy',
+                    },
+                  });
+                </script>
+                <br />
+              </div>
+              <!-- end eu cookie block --->
+            </div>
+            <br />
+            <br />
+          </div>
+          <!-- End Footer -->
+        </div>
+        <br /><br /><br /><br />
+        <br /><br /><br />
