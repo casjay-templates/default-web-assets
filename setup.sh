@@ -49,7 +49,8 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
-  sudo -u $APACHE_USER bash -c 'git -C '$STATICDIR' reset --hard -q;git -C '$STATICDIR' pull -q' &>>"$LOG_FILE"
+  git -C '$STATICDIR' reset --hard -q &>>"$LOG_FILE"
+  git -C '$STATICDIR' pull -q &>>"$LOG_FILE"
   if [ "$?" -ne 0 ]; then
     printf '%s\n' "Cloning Default Web Assets to $STATICDIR" | tee -a "$LOG_FILE"
     rm -Rf "$STATICDIR"
@@ -59,6 +60,11 @@ else
   printf '%s\n' "Cloning Default Web Assets to $STATICDIR" | tee -a "$LOG_FILE"
   [ -d "$STATICDIR" ] && rm -Rf "$STATICDIR"
   git clone -q "$STATICREPO" "$STATICDIR" &>>"$LOG_FILE"
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if [ ! -d "$STATICDIR/.git" ]; then
+  echo "Something went horribly wrong"
+  exit 1
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Creating the directories" | tee -a "$LOG_FILE"
