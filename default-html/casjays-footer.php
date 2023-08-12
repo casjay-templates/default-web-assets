@@ -59,7 +59,7 @@
                 <a href="http://github.com/casjay" target="_blank" rel="noopener">Jason M. Hempstead (Casjay)</a>
                 <br />
                 This site is powered by an
-                <a href="https://github.com/casjay-templates/jekyll-site" target="_blank" rel="noopener">open source </a
+                <a href="https://github.com/casjay-templates/default-web-assets" target="_blank" rel="noopener">open source </a
                 >theme
               </div>
               <br />
