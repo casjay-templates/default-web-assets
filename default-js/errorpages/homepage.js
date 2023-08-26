@@ -1,4 +1,6 @@
 function homepage() {
-  var currentSite = window.location.hostname;
-  window.location = "http://" + currentSite;
+  let proto = location.protocol;
+  let port = location.port;
+  let currentSite = window.location.hostname;
+  window.location = proto + '//' + currentSite + ':' + port;
 }
