@@ -17,19 +17,20 @@
 APPNAME="default-web-assets"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #set opts
 GET_WEB_USER="$(grep -REi 'apache|httpd|www-data|nginx' /etc/passwd | head -n1 | cut -d: -f1 || false)"
 REPLACE_FOOTER_FILES="default-error/403.html default-error/404.html default-error/418.html default-error/500.html "
 REPLACE_FOOTER_FILES+="default-error/502.html default-error/503.html default-error/504.html default-html/nginx-proxy.html "
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[ -n "$(command -v hostname 2>/dev/null)" ] && [ -z "$STATICSITE" ] && STATICSITE="$(hostname -f 2>/dev/null)"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
-STATICDOM="${STATICDOM:-$HOSTNAME}"
 STATICWEB="${STATICWEB:-/var/www}"
-STATICDIR="${STATICDIR:-/usr/share/httpd}"
 STATICSITE="${STATICSITE:-$HOSTNAME}"
+STATICDOM="${STATICDOM:-$STATICSITE}"
+STATICDIR="${STATICDIR:-/usr/share/httpd}"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
