@@ -39,13 +39,7 @@ LOG_FILE="/var/log/$APPNAME.log"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 echo "Setting up $APPNAME: $(date)" >"$LOG_FILE"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-if [ -f "$STATICDIR/.env" ]; then
-  . "$STATICDIR/.env"
-else
-  echo "# Settings for $APPNAME" >"$STATICDIR/.env"
-  echo "STATICSITE=\"$STATICSITE\"" >>"$STATICDIR/.env"
-  echo "APACHE_USER=\"$APACHE_USER\"" >>"$STATICDIR/.env"
-fi
+[ -f "$STATICDIR/.env" ] && . "$STATICDIR/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
@@ -177,6 +171,12 @@ error_page   504  =  /default-error/504.html;
 EOF
   systemctl is-enabled nginx 2>&1 | grep -q enabled && systemctl restart nginx &>>"$LOG_FILE"
 fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Updating the env file"
+mkdir -p "$STATICDIR"
+echo "# Settings for $APPNAME" >"$STATICDIR/.env"
+echo "STATICSITE=\"$STATICSITE\"" >>"$STATICDIR/.env"
+echo "APACHE_USER=\"$APACHE_USER\"" >>"$STATICDIR/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
   printf '%s\n' "Setting up for Apache user: $APACHE_USER" | tee -a "$LOG_FILE"
