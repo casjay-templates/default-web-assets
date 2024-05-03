@@ -146,21 +146,21 @@ EOF
 printf '%s\n' "Creating /etc/nginx/global.d/static.conf" | tee -a "$LOG_FILE"
 if [ -d "/etc/nginx/global.d" ]; then
   cat <<EOF >"/etc/nginx/global.d/static.conf"
-location ^~ /error/ { root $STATICDIR/error; }
-location ^~ /cgi-bin/ { root $STATICDIR/cgi-bin; }
-location ^~ /images/ { root $STATICDIR/default-images; }
-location ^~ /default-js/ { root $STATICDIR/default-js; }
-location ^~ /default-css/ { root $STATICDIR/default-css; }
-location ^~ /default-html/ { root $STATICDIR/default-html; }
-location ^~ /default-error/ { root $STATICDIR/default-error; }
-location ^~ /default-fonts/ { root $STATICDIR/default-fonts; }
-location ^~ /default-icons/ { root $STATICDIR/default-icons; }
-location ^~ /default-images/ { root $STATICDIR/default-images; }
-location ^~ /favicon.ico { alias $STATICDIR/default-icons/favicon.png; } 
-location ^~ /health { alias $STATICDIR/default-health/status.txt; } 
-location ^~ /health/txt { alias $STATICDIR/default-health/status.txt; } 
-location ^~ /health/json { alias $STATICDIR/default-health/status.json; } 
-location ^~ /health/status { alias $STATICDIR/default-health/status.json; } 
+location ^~ /error/ { root /usr/share/httpd; }
+location ^~ /cgi-bin/ { root /usr/share/httpd/cgi-bin; }
+location ^~ /images/ { alias /usr/share/httpd/default-images; }
+location ^~ /default-js/ { root /usr/share/httpd; }
+location ^~ /default-css/ { root /usr/share/httpd; }
+location ^~ /default-html/ { root /usr/share/httpd; }
+location ^~ /default-error/ { root /usr/share/httpd; }
+location ^~ /default-fonts/ { root /usr/share/httpd; }
+location ^~ /default-icons/ { root /usr/share/httpd; }
+location ^~ /default-images/ { root /usr/share/httpd; }
+location ^~ /favicon.ico { alias /usr/share/httpd/default-icons/favicon.png; }
+location ^~ /health { alias /usr/share/httpd/default-health/status.txt; }
+location ^~ /health/txt { alias /usr/share/httpd/default-health/status.txt; }
+location ^~ /health/json { alias /usr/share/httpd/default-health/status.json; }
+location ^~ /health/status { alias /usr/share/httpd/default-health/status.json; }
 error_page   403  =  /default-error/403.html;
 error_page   404  =  /default-error/404.html;
 error_page   418  =  /default-error/418.html;
