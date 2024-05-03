@@ -43,8 +43,8 @@ echo "Setting up $APPNAME: $(date)" >"$LOG_FILE"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
-  git -C '$STATICDIR' reset --hard -q &>>"$LOG_FILE"
-  git -C '$STATICDIR' pull -q &>>"$LOG_FILE"
+  git -C "$STATICDIR" reset --hard -q &>>"$LOG_FILE"
+  git -C "$STATICDIR" pull -q &>>"$LOG_FILE"
   if [ "$?" -ne 0 ]; then
     printf '%s\n' "Cloning Default Web Assets to $STATICDIR" | tee -a "$LOG_FILE"
     rm -Rf "$STATICDIR"
