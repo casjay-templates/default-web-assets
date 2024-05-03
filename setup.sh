@@ -23,7 +23,7 @@ GET_WEB_USER="$(grep -REi 'apache|httpd|www-data|nginx' /etc/passwd | head -n1 |
 REPLACE_FOOTER_FILES="default-error/403.html default-error/404.html default-error/418.html default-error/500.html "
 REPLACE_FOOTER_FILES+="default-error/502.html default-error/503.html default-error/504.html default-html/nginx-proxy.html "
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[ -n "$(command -v hostname 2>/dev/null)" ] && [ -z "$STATICSITE" ] && STATICSITE="$(hostname -f 2>/dev/null)"
+[ -z "$STATICDOM" ] && [ -n "$(command -v hostname 2>/dev/null)" ] && STATICDOM="$(hostname -d 2>/dev/null)"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
