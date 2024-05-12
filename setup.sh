@@ -18,6 +18,12 @@ APPNAME="default-web-assets"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+NETDEV="$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")"
+[ -n "$NETDEV" ] && mycurrentipaddress_6="$(ifconfig $NETDEV | grep -E 'venet|inet' | grep -v 'docker' | grep inet6 | grep -i 'global' | awk '{print $2}' | head -n1 | grep '^')" || mycurrentipaddress_6="$(hostname -I | tr ' ' '\n' | grep -Ev '^::1|^$' | grep ':.*:' | head -n1 | grep '^' || echo '::1')"
+[ -n "$NETDEV" ] && mycurrentipaddress_4="$(ifconfig $NETDEV | grep -E 'venet|inet' | grep -v '127.0.0.' | grep inet | grep -v 'inet6' | awk '{print $2}' | sed 's#addr:##g' | head -n1 | grep '^')" || mycurrentipaddress_4="$(hostname -I | tr ' ' '\n' | grep -vE '|127\.0\.0|172\.17\.0|:.*:|^$' | head -n1 | grep '[0-9]\.[0-9]' || echo '127.0.0.1')"
+set_domainname="$(hostname -f | awk -F '.' '{$1="";OFS="." ; print $0}' | sed 's/^.//' | tr ' ' '.' | grep '^' || hostname -f)"
+set_hostname="$([ -n "$(command -v hostname 2>/dev/null && hostname -f 2>/dev/null)" ] || echo "$HOSTNAME")"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #set opts
 GET_WEB_USER="$(grep -REi 'apache|httpd|www-data|nginx' /etc/passwd | head -n1 | cut -d: -f1 || false)"
 REPLACE_FOOTER_FILES="default-error/403.html default-error/404.html default-error/418.html default-error/500.html "
@@ -28,14 +34,14 @@ REPLACE_FOOTER_FILES+="default-error/502.html default-error/503.html default-err
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
 STATICWEB="${STATICWEB:-/var/www}"
-STATICSITE="${STATICSITE:-$HOSTNAME}"
 STATICDOM="${STATICDOM:-$STATICSITE}"
+STATICSITE="${STATICSITE:-$set_hostname}"
 STATICDIR="${STATICDIR:-/usr/share/httpd}"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
 STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
-CURRENT_IP_4="${CURRENT_IP_4:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
+CURRENT_IP_4="${mycurrentipaddress_4:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
 LOG_FILE="/var/log/$APPNAME.log"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 echo "Setting up $APPNAME: $(date)" >"$LOG_FILE"
@@ -61,6 +67,11 @@ if [ ! -d "$STATICDIR/.git" ]; then
   echo "Something went horribly wrong"
   exit 1
 fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Updating /etc/hosts" | tee -a "$LOG_FILE"
+[ -w "/etc/hosts" ] || chattr +i /etc/hosts
+grep -sqe " $STATICSITE" /etc/hosts || echo "$CURRENT_IP_4       $STATICSITE" >>/etc/hosts
+grep -sqe " unknown.$STATICSITE" /etc/hosts || echo "127.0.0.20       unknown.$STATICSITE" >>/etc/hosts
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Creating the directories" | tee -a "$LOG_FILE"
 [ -d "/var/www/html/default" ] || mkdir -p "/var/www/html/default"
