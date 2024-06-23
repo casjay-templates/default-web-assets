@@ -51,8 +51,10 @@
       </div>
       <div class="c5">
         <br />
-        <?php echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<BR>"; echo "IP Address: " . $_SERVER['SERVER_ADDR'] .
-        "<BR />"; ?> <br /><br />
+        <?php echo "System Hostname: " , gethostname() . "<br />"; ?>
+        <?php echo "Server Name: " . $_SERVER['SERVER_NAME'] . "<br />"; ?>
+        <?php echo "IP Address: " . $_SERVER['SERVER_ADDR'] . "<br />"; ?>
+        <br /><br />
         Linux OsVer:
         <?php echo shell_exec('cat /etc/redhat-release'); ?><br />
         ConfigVer:
