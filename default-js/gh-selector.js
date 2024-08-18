@@ -8,7 +8,7 @@ const postLinksElement = document.querySelector('.post-links');
 loadBlog();
 
 function loadBlog() {
-  if(localStorage.postsHTML) {
+  if (localStorage.postsHTML) {
     postsElement.innerHTML = localStorage.postsHTML;
   }
 
@@ -18,20 +18,21 @@ function loadBlog() {
     .getPosts()
     .then(addPosts)
     .then(() => {
-      localStorage.postsHTML = postsElement.innerHTML
-    }).then(navigateToHash)
+      localStorage.postsHTML = postsElement.innerHTML;
+    })
+    .then(navigateToHash)
     .then(() => {
       document.querySelector('.loading').style.display = 'none';
     });
 }
 
 function addPosts(posts) {
-  posts.forEach(post => {
+  posts.forEach((post) => {
     addPostLink(post);
 
     const postElement = document.getElementById(post.path);
-    if(postElement) {
-      if(post.updated) {
+    if (postElement) {
+      if (post.updated) {
         postElement.innerHTML = getPostHTML(post);
       }
     } else {
@@ -52,8 +53,11 @@ function getPostHTML(post) {
   return `
   <small><strong>Path:</strong> ${post.path}</small><br>
   <small><strong>Logged:</strong> ${post.commits.created}</small>
-  ${ post.commits.updated == post.commits.created ? '' :
-      `<br><small><strong>Updated:</strong> ${post.commits.updated}</small>` }
+  ${
+    post.commits.updated == post.commits.created
+      ? ''
+      : `<br><small><strong>Updated:</strong> ${post.commits.updated}</small>`
+  }
   ${post.html}`;
 }
 
@@ -75,7 +79,7 @@ function navigateToHash() {
 }
 
 function setVersion() {
-  if(localStorage.version != VERSION) {
+  if (localStorage.version != VERSION) {
     localStorage.clear();
     localStorage.version = VERSION;
   }

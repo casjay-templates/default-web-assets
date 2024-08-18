@@ -23,17 +23,13 @@
                 and powered by <a href="https://casjaysdev.pro" target="_blank">casjaysdev.pro</a>
                 <br />
                 <br />
-                <a href="https://www.patreon.com/casjay" target="_blank"
-                  ><img
+                <a href="https://www.patreon.com/casjay" target="_blank"><img
                     src="https://img.shields.io/badge/patreon-donate-orange.svg"
                     border="0"
-                    alt="Casjays Patreon Page"
-                /></a>
-                <a href="https://www.paypal.me/casjaysdev" target="_blank"
-                  ><img
+                    alt="Casjays Patreon Page" /></a>
+                <a href="https://www.paypal.me/casjaysdev" target="_blank"><img
                     src="https://img.shields.io/badge/Donate-PayPal-green.svg?casjay@yahoo.com"
-                    alt="Casjays Paypal Page"
-                /></a>
+                    alt="Casjays Paypal Page" /></a>
                 <br />
                 <br />
                 <a href="https://help.casjay.pro" target="_blank">CasjaysDev Support</a> |
@@ -59,8 +55,7 @@
                 <a href="http://github.com/casjay" target="_blank" rel="noopener">Jason M. Hempstead (Casjay)</a>
                 <br />
                 This site is powered by an
-                <a href="https://github.com/casjay-templates/default-web-assets" target="_blank" rel="noopener">open source </a
-                >theme
+                <a href="https://github.com/casjay-templates/default-web-assets" target="_blank" rel="noopener">open source </a>theme
               </div>
               <br />
               <!-- end engine block --->
@@ -73,8 +68,7 @@
                   src="https://freesecure.timeanddate.com/clock/i7k2kmtc/n12/fn6/fs16/fc9ff/tc000/ftb/bas2/bat1/bacfff/pa8/tt0/tw1/th1/ta1/tb4"
                   frameborder="0"
                   width="212"
-                  height="56"
-                ></iframe>
+                  height="56"></iframe>
                 <br />
                 <br />
               </div>
@@ -84,8 +78,7 @@
               <div class="text-center align-items-center fs-3">
                 <script
                   src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
-                  data-cfasync="false"
-                ></script>
+                  data-cfasync="false"></script>
                 <script>
                   window.cookieconsent.initialise({
                     palette: {
@@ -100,8 +93,7 @@
                     },
                     theme: 'edgeless',
                     content: {
-                      message:
-                        'This site uses cookie and in accordance with the EU GDPR<br />law this message is being displayed.<br />',
+                      message: 'This site uses cookie and in accordance with the EU GDPR<br />law this message is being displayed.<br />',
                       dismiss: 'dismiss',
                       link: 'CasjaysDev Privacy Policy',
                       href: 'https://casjaysdev.pro/policy',

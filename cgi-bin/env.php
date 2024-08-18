@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
 
-<!--
+    <!--
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ##@Version       :
 # @Author        : Jason
@@ -27,18 +28,20 @@
     <meta name="generator" content="CasjaysDev">
     <link rel="shortcut icon" href="https://REPLACE_STATIC_HOSTNAME/favicon.ico" />
 
-<!-- Begin Main Site -->
+    <!-- Begin Main Site -->
     <title>PHP Info</title>
 
 </head>
 
 <!-- Begin Body -->
+
 <body>
-<!-- Begin Main Body -->
+    <!-- Begin Main Body -->
 
-<?php phpinfo() ?>
+    <?php phpinfo() ?>
 
-<!-- End Main End Body -->
+    <!-- End Main End Body -->
 
 </body>
+
 </html>
