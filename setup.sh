@@ -190,6 +190,10 @@ echo "# Settings for $APPNAME" >"$STATICDIR/.env"
 echo "STATICSITE=\"$STATICSITE\"" >>"$STATICDIR/.env"
 echo "APACHE_USER=\"$APACHE_USER\"" >>"$STATICDIR/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if [ -n "$(command -v update-ip 2>/dev/null)" ]; then
+  update-ip >/dev/null
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
   printf '%s\n' "Setting up for Apache user: $APACHE_USER" | tee -a "$LOG_FILE"
   chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
