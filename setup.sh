@@ -99,6 +99,10 @@ printf '%s\n' "Setting IP address to: $CURRENT_IP_4" | tee -a "$LOG_FILE"
 find "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_IP_4_ADRESS|'$CURRENT_IP_4'|g' {} \; >>"$LOG_FILE" 2>&1
 find "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_IP_4_ADRESS|'$CURRENT_IP_4'|g' {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf '%s\n' "Setting HOSTNAME: $HOSTNAME" | tee -a "$LOG_FILE"
+find "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_HOSTNAME|'$HOSTNAME'|g' {} \; >>"$LOG_FILE" 2>&1
+find "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_HOSTNAME|'$HOSTNAME'|g' {} \; >>"$LOG_FILE" 2>&1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix domain name
 printf '%s\n' "Setting domain name to: $STATICDOM" | tee -a "$LOG_FILE"
 find "$STATICDIR" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|casjay.in|'$STATICDOM'|g' {} \; >>"$LOG_FILE" 2>&1
