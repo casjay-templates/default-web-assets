@@ -71,7 +71,7 @@
       <!-- end clock block --->
 
       <!-- begin eu cookie block --->
-      <div class="text-center align-items-center fs-3">
+      <div class="eu">
         <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
           data-cfasync="false"></script>
         <script>
