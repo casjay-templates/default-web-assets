@@ -152,7 +152,7 @@
       });
     </script>
     <br>
-
+    <!-- end EU compliant --->
   </div>
   <br> <br>
   <!-- End Footer -->

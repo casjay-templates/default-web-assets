@@ -154,13 +154,15 @@
               </div>
               <!-- end clock block --->
 
-              <!-- begin eu cookie block --->
-              <div class="text-center align-items-center fs-3">
-                <script
-                  src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
-                  data-cfasync="false"
-                ></script>
-                <script>
+              <!-- Begin EU compliant -->
+              <link
+                rel="stylesheet"
+                type="text/css"
+                href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
+              />
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+              <script>
+                window.addEventListener('load', function () {
                   window.cookieconsent.initialise({
                     palette: {
                       popup: {
@@ -168,23 +170,23 @@
                         text: '#ffcdfd',
                       },
                       button: {
-                        background: '#f8a8ff',
-                        text: '#3f0045',
+                        background: 'transparent',
+                        text: '#f8a8ff',
+                        border: '#f8a8ff',
                       },
                     },
-                    theme: 'edgeless',
                     content: {
-                      message:
-                        'This site uses cookie and in accordance with the EU GDPR<br />law this message is being displayed.<br />',
-                      dismiss: 'dismiss',
-                      link: 'CasjaysDev Privacy Policy',
-                      href: 'https://casjaysdev.pro/policy',
+                      message: 'In accordance with the EU GDPR law this message is being displayed. - ',
+                      dismiss: 'I Agree',
+                      link: 'CasjaysDev Policy',
+                      href: 'https://casjaysdev.pro/policy/',
                     },
+                    type: 'opt-out',
                   });
-                </script>
-                <br />
-              </div>
-              <!-- end eu cookie block --->
+                });
+              </script>
+              <br />
+              <!-- end EU compliant --->
             </div>
             <br />
             <br />
