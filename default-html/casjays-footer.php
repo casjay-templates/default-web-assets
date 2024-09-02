@@ -70,35 +70,36 @@
       </div>
       <!-- end clock block --->
 
-      <!-- begin eu cookie block --->
-      <div class="eu">
-        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
-          data-cfasync="false"></script>
-        <script>
+      <!-- Begin EU compliant -->
+      <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+      <script>
+        window.addEventListener("load", function () {
           window.cookieconsent.initialise({
-            palette: {
-              popup: {
-                background: '#64386b',
-                text: '#ffcdfd',
+            "palette": {
+              "popup": {
+                "background": "#64386b",
+                "text": "#ffcdfd"
               },
-              button: {
-                background: '#f8a8ff',
-                text: '#3f0045',
-              },
+              "button": {
+                "background": "transparent",
+                "text": "#f8a8ff",
+                "border": "#f8a8ff"
+              }
             },
-            theme: 'edgeless',
-            content: {
-              message:
-                'This site uses cookie and in accordance with the EU GDPR<br />law this message is being displayed.<br />',
-              dismiss: 'dismiss',
-              link: 'CasjaysDev Privacy Policy',
-              href: 'https://casjaysdev.pro/policy',
+            "content": {
+              "message": "In accordance with the EU GDPR law this message is being displayed. - ",
+              "dismiss": "I Agree",
+              "link": "CasjaysDev Policy",
+              "href": "https://casjaysdev.pro/policy/"
             },
-          });
-        </script>
-        <br />
-      </div>
-      <!-- end eu cookie block --->
+            "type": "opt-out"
+          })
+        });
+      </script>
+      <br>
+      <!-- end EU compliant --->
     </div>
     <br />
     <br />
