@@ -68,6 +68,8 @@
       <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/default-icons/powered_by_redhat.jpg" /> </a><br />
     <br /><br /><br /><br /><br />
   </div>
+  <br />
+  <hr />
   <div class="footer footer-custom col-sm-12">
     <!-- Begin Casjays Developments Footer -->
     <!-- Begin last updated -->
