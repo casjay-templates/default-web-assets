@@ -7,12 +7,6 @@
       <br />
       <br />
       <br />
-      <!-- Begin last updated -->
-      <span style="color: skyblue"> REPLACE_LAST_UPDATED_ON_MESSAGE </span>
-      <br />
-      <br />
-      <!-- End last updated -->
-
       <!-- begin legal block --->
       <div class="legal">
         REPLACE_COPYRIGHT_FOOTER
@@ -69,6 +63,15 @@
         <br />
       </div>
       <!-- end clock block --->
+
+      <!-- Begin last updated -->
+      <br />
+      <br />
+      <span style="color: skyblue"> REPLACE_LAST_UPDATED_ON_MESSAGE </span>
+      <br />
+      <br />
+      <br />
+      <!-- End last updated -->
 
       <!-- Begin EU compliant -->
       <link rel="stylesheet" type="text/css"

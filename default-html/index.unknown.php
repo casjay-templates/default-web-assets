@@ -72,11 +72,6 @@
   <hr />
   <div class="footer footer-custom col-sm-12">
     <!-- Begin Casjays Developments Footer -->
-    <!-- Begin last updated -->
-    <span style="color: skyblue;">
-      REPLACE_LAST_UPDATED_ON_MESSAGE
-    </span>
-    <!-- End last updated -->
     <br /><br /><br />
     REPLACE_COPYRIGHT_FOOTER
     <br>
@@ -124,6 +119,15 @@
       gtag('config', 'UA-936146-1');
     </script>
     <!-- Eng Google Track -->
+
+    <!-- Begin last updated -->
+    <br />
+    <br />
+    <span style="color: skyblue"> REPLACE_LAST_UPDATED_ON_MESSAGE </span>
+    <br />
+    <br />
+    <br />
+    <!-- End last updated -->
 
     <!-- Begin EU compliant -->
     <link rel="stylesheet" type="text/css"

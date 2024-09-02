@@ -80,11 +80,6 @@
   <hr />
   <div class="footer footer-custom col-sm-12">
     <!-- Begin Casjays Developments Footer -->
-    <!-- Begin last updated -->
-    <span style="color: skyblue;">
-      REPLACE_LAST_UPDATED_ON_MESSAGE
-    </span>
-    <!-- End last updated -->
     <br /><br /><br />
     REPLACE_COPYRIGHT_FOOTER
     <br>
