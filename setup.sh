@@ -21,15 +21,17 @@ HOME="${USER_HOME:-${HOME}}"
 NETDEV="$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")"
 [ -n "$NETDEV" ] && mycurrentipaddress_6="$(ifconfig $NETDEV | grep -E 'venet|inet' | grep -v 'docker' | grep inet6 | grep -i 'global' | awk '{print $2}' | head -n1 | grep '^')" || mycurrentipaddress_6="$(hostname -I | tr ' ' '\n' | grep -Ev '^::1|^$' | grep ':.*:' | head -n1 | grep '^' || echo '::1')"
 [ -n "$NETDEV" ] && mycurrentipaddress_4="$(ifconfig $NETDEV | grep -E 'venet|inet' | grep -v '127.0.0.' | grep inet | grep -v 'inet6' | awk '{print $2}' | sed 's#addr:##g' | head -n1 | grep '^')" || mycurrentipaddress_4="$(hostname -I | tr ' ' '\n' | grep -vE '|127\.0\.0|172\.17\.0|:.*:|^$' | head -n1 | grep '[0-9]\.[0-9]' || echo '127.0.0.1')"
-set_domainname="$(hostname -d 2>"/dev/null" || hostname -f)"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 set_hostname="$(hostname -f 2>"/dev/null" || echo "$HOSTNAME")"
+set_domainname="$(hostname -d 2>"/dev/null" || echo "$HOSTNAME")"
+[ -n "$STATICDOM" ] || STATICDOM="$set_domainname" 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #set opts
 GET_WEB_USER="$(grep -REi 'apache|httpd|www-data|nginx' /etc/passwd | head -n1 | cut -d: -f1 || false)"
 REPLACE_FOOTER_FILES="default-error/403.html default-error/404.html default-error/418.html default-error/500.html "
 REPLACE_FOOTER_FILES+="default-error/502.html default-error/503.html default-error/504.html default-html/nginx-proxy.html "
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[ -z "$STATICDOM" ] && [ -n "$(command -v hostname 2>/dev/null)" ] && STATICDOM="$(hostname -d 2>/dev/null)"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [ -f "$STATICDIR/.env" ] && . "$STATICDIR/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
