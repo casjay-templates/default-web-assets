@@ -31,12 +31,15 @@ REPLACE_FOOTER_FILES+="default-error/502.html default-error/503.html default-err
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 [ -z "$STATICDOM" ] && [ -n "$(command -v hostname 2>/dev/null)" ] && STATICDOM="$(hostname -d 2>/dev/null)"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[ -f "$STATICDIR/.env" ] && . "$STATICDIR/.env"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
 STATICWEB="${STATICWEB:-/var/www}"
 STATICDOM="${STATICDOM:-$STATICSITE}"
 STATICSITE="${STATICSITE:-$set_hostname}"
 STATICDIR="${STATICDIR:-/usr/local/share/httpd}"
+STATICTEMPDIR="${TMPDIR:-/tmp}/web-assets-$$"
 APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
@@ -45,8 +48,6 @@ CURRENT_IP_4="${mycurrentipaddress_4:-$(nslookup "$HOSTNAME" | grep -i 'address:
 LOG_FILE="/var/log/$APPNAME.log"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 echo "Setting up $APPNAME: $(date)" >"$LOG_FILE"
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[ -f "$STATICDIR/.env" ] && . "$STATICDIR/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
@@ -74,8 +75,9 @@ grep -sqe " $STATICSITE" /etc/hosts || echo "$CURRENT_IP_4       $STATICSITE" >>
 grep -sqe " unknown.$STATICSITE" /etc/hosts || echo "127.0.0.20       unknown.$STATICSITE" >>/etc/hosts
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Creating the directories" | tee -a "$LOG_FILE"
-[ -d "/var/www/html/default" ] || mkdir -p "/var/www/html/default"
-[ -d "/var/www/html/unknown" ] || mkdir -p "/var/www/html/unknown"
+[ -d "$STATICWEB/apache" ] || mkdir -p "/$STATICWEB/apache"
+[ -d "$STATICWEB/html/default" ] || mkdir -p "$STATICWEB/html/default"
+[ -d "$STATICWEB/html/unknown" ] || mkdir -p "$STATICWEB/html/unknown"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix last updated on
 printf '%s\n' "Setting last updated to: $UPDATED_MESSAGE" | tee -a "$LOG_FILE"
