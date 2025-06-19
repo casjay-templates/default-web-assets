@@ -13,10 +13,22 @@
 # @Other         :
 # @Resource      :
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 APPNAME="default-web-assets"
 USER="${SUDO_USER:-${USER}}"
 HOME="${USER_HOME:-${HOME}}"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+__get_www_user() {
+  local user=""
+  user="$(grep -sh "www-data" "/etc/passwd" || grep -sh "apache" "/etc/passwd" || grep -sh "nginx" "/etc/passwd")"
+  [ -n "$user" ] && echo "$user" | awk -F ':' '{print $1}' || return 9
+}
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+__get_www_group() {
+  local group=""
+  group="$(grep -sh "www-data" "/etc/group" || grep -sh "apache" "/etc/group" || grep -sh "nginx" "/etc/group")"
+  [ -n "$group" ] && echo "$group" | awk -F ':' '{print $1}' || return 9
+}
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 NETDEV="$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")"
 [ -n "$NETDEV" ] && mycurrentipaddress_6="$(ifconfig $NETDEV | grep -E 'venet|inet' | grep -v 'docker' | grep inet6 | grep -i 'global' | awk '{print $2}' | head -n1 | grep '^')" || mycurrentipaddress_6="$(hostname -I | tr ' ' '\n' | grep -Ev '^::1|^$' | grep ':.*:' | head -n1 | grep '^' || echo '::1')"
@@ -24,16 +36,18 @@ NETDEV="$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 set_hostname="$(hostname -f 2>"/dev/null" || echo "$HOSTNAME")"
 set_domainname="$(hostname -d 2>"/dev/null" || echo "$HOSTNAME")"
-[ -n "$STATICDOM" ] || STATICDOM="$set_domainname" 
+[ -n "$STATICDOM" ] || STATICDOM="$set_domainname"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #set opts
-GET_WEB_USER="$(grep -REi 'apache|httpd|www-data|nginx' /etc/passwd | head -n1 | cut -d: -f1 || false)"
+GET_WEB_USER="$(__get_www_user || false)"
+GET_WEB_GROUP="$(__get_www_group || false)"
 REPLACE_FOOTER_FILES="default-error/403.html default-error/404.html default-error/418.html default-error/500.html "
 REPLACE_FOOTER_FILES+="default-error/502.html default-error/503.html default-error/504.html default-html/nginx-proxy.html "
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-[ -f "$STATICDIR/.env" ] && . "$STATICDIR/.env"
+APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
+APACHE_GROUP="${APACHE_GROUP:-$GET_WEB_USER}"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
@@ -42,14 +56,16 @@ STATICDOM="${STATICDOM:-$STATICSITE}"
 STATICSITE="${STATICSITE:-$set_hostname}"
 STATICDIR="${STATICDIR:-/usr/local/share/httpd}"
 STATICTEMPDIR="${TMPDIR:-/tmp}/web-assets-$$"
-APACHE_USER="${APACHE_USER:-$GET_WEB_USER}"
 COPYRIGHT_FOOTER="Copyright 1999 - $COPYRIGHT_YEAR"
 UPDATED_MESSAGE="$(date +'Last updated on: %Y-%m-%d at %H:%M:%S')"
 STATICREPO="${STATICREPO:-https://github.com/casjay-templates/default-web-assets}"
-CURRENT_IP_4="${mycurrentipaddress_4:-$(nslookup "$HOSTNAME" | grep -i 'address:' | grep -v '#' | awk '{print $2}' | grep '^' || echo '')}"
+CURRENT_IP_4="${CURRENT_IP_4:-$mycurrentipaddress_4}"
+CURRENT_IP_6="${CURRENT_IP_6:-$mycurrentipaddress_6}"
 LOG_FILE="/var/log/$APPNAME.log"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 echo "Setting up $APPNAME: $(date)" >"$LOG_FILE"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[ -f "$STATICDIR/.env" ] && . "$STATICDIR/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -d "$STATICDIR/.git" ]; then
   printf '%s\n' "Updating Web Assets in $STATICDIR" | tee -a "$LOG_FILE"
@@ -209,8 +225,13 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -n "$APACHE_USER" ]; then
   printf '%s\n' "Setting up for Apache user: $APACHE_USER" | tee -a "$LOG_FILE"
-  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICWEB"
-  chown -Rf "$APACHE_USER":"$APACHE_USER" "$STATICDIR"
+  chown -Rf "$APACHE_USER" "$STATICWEB"
+  chown -Rf "$APACHE_USER" "$STATICDIR"
+fi
+if [ -n "$APACHE_GROUP" ]; then
+  printf '%s\n' "Setting up for Apache group: $APACHE_GROUP" | tee -a "$LOG_FILE"
+  chgrp -Rf "$APACHE_GROUP" "$STATICWEB"
+  chgrp -Rf "$APACHE_GROUP" "$STATICDIR"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Web assets has been setup" | tee -a "$LOG_FILE"
