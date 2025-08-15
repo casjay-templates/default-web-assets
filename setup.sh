@@ -143,14 +143,14 @@ find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.sh" -o -iname "*.
 find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.sh" -o -iname "*.pl" -o -iname "*.cgi" \) -exec chmod 755 -Rf {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #### Change for archlinux
-if [ "$(command -v pacman >>"$LOG_FILE" 2>&1)" ]; then
+if [ -n "$(command -v pacman)" ]; then
   printf '%s\n' "Setting up for Arch based distros" | tee -a "$LOG_FILE"
   find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >>"$LOG_FILE" 2>&1
   find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
   find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Arch based system|g' {} \; >>"$LOG_FILE" 2>&1
   find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://archlinux.org"> <img border="0" alt="Arch/Archo/Manjaro" src="/icons/powered_by_archlinux.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
 #### Change for debian/ubuntu
-elif [ "$(command -v apt-get >>"$LOG_FILE" 2>&1)" ]; then
+elif [ -n "$(command -v apt-get)" ]; then
   printf '%s\n' "Setting up for Debian based distros" | tee -a "$LOG_FILE"
   find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|Redhat based system|Debian based system|g' {} \; >>"$LOG_FILE" 2>&1
   find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" \) -exec sed -i 's|href="https://redhat.com"> <img border="0" alt="Redhat/CentOS/Fedora/SL Linux" src="/icons/powered_by_redhat.jpg">|href="https://debian.com"> <img border="0" alt="Debian/Ubuntu/Mint" src="/icons/powered_by_debian.jpg"|g' {} \; >>"$LOG_FILE" 2>&1
@@ -179,7 +179,7 @@ done || false
 printf '%s\n' "Setting up cron" | tee -a "$LOG_FILE"
 cat <<EOF | tee /etc/cron.d/static-website &>"/dev/null"
 # Update webfiles daily
-30 3 * * * root ping -c 2 1.1.1.1 &>>"$LOG_FILE" && bash -c "\$(curl -LSs "$STATICREPO/raw/main/setup.sh")" &>/var/log/static-website.log 
+30 3 * * * root ping -c 2 1.1.1.1 &>>"$LOG_FILE" && bash -c "\$(curl -LSs "$STATICREPO/raw/main/setup.sh")" &>/var/log/static-website.log
 
 EOF
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -188,7 +188,6 @@ if [ -d "/etc/nginx/global.d" ]; then
   cat <<EOF >"/etc/nginx/global.d/static.conf"
 location ^~ /error/ { root /usr/local/share/httpd; }
 location ^~ /cgi-bin/ { root /usr/local/share/httpd/cgi-bin; }
-location ^~ /images/ { alias /usr/local/share/httpd/default-images; }
 location ^~ /default-js/ { root /usr/local/share/httpd; }
 location ^~ /default-css/ { root /usr/local/share/httpd; }
 location ^~ /default-html/ { root /usr/local/share/httpd; }
@@ -196,8 +195,9 @@ location ^~ /default-error/ { root /usr/local/share/httpd; }
 location ^~ /default-fonts/ { root /usr/local/share/httpd; }
 location ^~ /default-icons/ { root /usr/local/share/httpd; }
 location ^~ /default-images/ { root /usr/local/share/httpd; }
-location ^~ /favicon.ico { alias /usr/local/share/httpd/default-icons/favicon.png; }
+location ^~ /images/ { alias /usr/local/share/httpd/default-images; }
 location ^~ /health { alias /usr/local/share/httpd/default-health/status.txt; }
+location ^~ /favicon.ico { alias /usr/local/share/httpd/default-icons/favicon.png; }
 location ^~ /health/txt { alias /usr/local/share/httpd/default-health/status.txt; }
 location ^~ /health/json { alias /usr/local/share/httpd/default-health/status.json; }
 location ^~ /health/status { alias /usr/local/share/httpd/default-health/status.json; }
