@@ -132,7 +132,7 @@ find "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.ht
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix static dir
 printf '%s\n' "Setting static dir to: $STATICWEB" | tee -a "$LOG_FILE"
-find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >>"$LOG_FILE" 2>&1
+#find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >>"$LOG_FILE" 2>&1
 find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
 find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
 find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
