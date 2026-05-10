@@ -191,12 +191,7 @@ if [ -d "/etc/nginx/global.d" ]; then
   cat <<EOF >"/etc/nginx/global.d/static.conf"
 location ^~ /error/ { root /usr/local/share/httpd; }
 location ^~ /cgi-bin/ { root /usr/local/share/httpd/cgi-bin; }
-location ^~ /default-js/ { root /usr/local/share/httpd; }
-location ^~ /default-css/ { root /usr/local/share/httpd; }
-location ^~ /default-html/ { root /usr/local/share/httpd; }
-location ^~ /default-error/ { root /usr/local/share/httpd; }
 location ^~ /default-fonts/ { root /usr/local/share/httpd; }
-location ^~ /default-icons/ { root /usr/local/share/httpd; }
 location ^~ /default-images/ { root /usr/local/share/httpd; }
 location ^~ /images/ { alias /usr/local/share/httpd/default-images; }
 location ^~ /health { alias /usr/local/share/httpd/default-health/status.txt; }
