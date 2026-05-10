@@ -52,6 +52,7 @@ APACHE_GROUP="${APACHE_GROUP:-$GET_WEB_USER}"
 #change to match your setup
 COPYRIGHT_YEAR="$(date +'%Y')"
 STATICWEB="${STATICWEB:-/var/www}"
+PUBLIC_WWW_DIR="${PUBLIC_WWW_DIR:-/var/www}"
 STATICDOM="${STATICDOM:-$STATICSITE}"
 STATICSITE="${STATICSITE:-$set_hostname}"
 STATICDIR="${STATICDIR:-/usr/local/share/httpd}"
@@ -134,7 +135,9 @@ find "$STATICWEB" -not -path "./git/*" \( -type f -iname "*.php" -o -iname "*.ht
 printf '%s\n' "Setting static dir to: $STATICWEB" | tee -a "$LOG_FILE"
 #find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICWEB'|g' {} \; >>"$LOG_FILE" 2>&1
 find "$STATICDIR" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
-find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|/var/www|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
+while IFS= read -r f; do
+  grep -qi "/var/www" "$f" && sed -i 's|/var/www|'"$PUBLIC_WWW_DIR"'|g' "$f" >>"$LOG_FILE" 2>&1
+done < <(find "$STATICWEB" -not -path "./.git/*" \( -type f -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \))
 find "$STATICWEB" -not -path "./git/*" \( -type f -o -iname "*.php" -o -iname "*.html" -o -iname "*.md" -o -iname "*.css" \) -exec sed -i 's|REPLACE_STATICDIR|'$STATICDIR'|g' {} \; >>"$LOG_FILE" 2>&1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Fix permissions
