@@ -131,6 +131,15 @@
     <!-- Begin EU compliant -->
     <link rel="stylesheet" type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+    <style>
+      .cc-window.cc-banner {
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        right: 0;
+        box-sizing: border-box;
+      }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
     <script>
       window.addEventListener("load", function () {

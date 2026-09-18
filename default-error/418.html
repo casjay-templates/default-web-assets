@@ -26,12 +26,6 @@
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
-    />
-
     <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
     <script src="/default-js/errorpages/isup.js" async defer></script>
     <script src="/default-js/errorpages/homepage.js" async defer></script>
@@ -145,39 +139,6 @@
               </div>
               <!-- end clock block --->
 
-              <!-- Begin EU compliant -->
-              <link
-                rel="stylesheet"
-                type="text/css"
-                href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
-              />
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-              <script>
-                window.addEventListener('load', function () {
-                  window.cookieconsent.initialise({
-                    palette: {
-                      popup: {
-                        background: '#64386b',
-                        text: '#ffcdfd',
-                      },
-                      button: {
-                        background: 'transparent',
-                        text: '#f8a8ff',
-                        border: '#f8a8ff',
-                      },
-                    },
-                    content: {
-                      message: 'In accordance with the EU GDPR law this message is being displayed. - ',
-                      dismiss: 'I Agree',
-                      link: 'CasjaysDev Policy',
-                      href: 'https://casjaysdev.pro/policy/',
-                    },
-                    type: 'opt-out',
-                  });
-                });
-              </script>
-              <br />
-              <!-- end EU compliant --->
               <!-- Begin last updated -->
               <br />
               <br />
@@ -193,6 +154,15 @@
                 type="text/css"
                 href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
               />
+              <style>
+                .cc-window.cc-banner {
+                  width: 100%;
+                  max-width: 100%;
+                  left: 0;
+                  right: 0;
+                  box-sizing: border-box;
+                }
+              </style>
               <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
               <script>
                 window.addEventListener('load', function () {

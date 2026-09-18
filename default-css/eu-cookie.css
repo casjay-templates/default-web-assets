@@ -118,7 +118,8 @@ UL LI {
 .code {
   margin: 20px 0;
   font-size: 0.9em;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   font-family: "Monofur", courier;
   background-color: #555;
   padding: 15px;
