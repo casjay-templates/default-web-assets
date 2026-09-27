@@ -193,7 +193,7 @@ location ^~ /error/ { root /usr/local/share/httpd; }
 location ^~ /cgi-bin/ { root /usr/local/share/httpd/cgi-bin; }
 location ^~ /default-fonts/ { root /usr/local/share/httpd; }
 location ^~ /default-images/ { root /usr/local/share/httpd; }
-location ^~ /images/ { alias /usr/local/share/httpd/default-images; }
+location ^~ /images/ { alias /usr/local/share/httpd/default-images/; }
 location ^~ /health { alias /usr/local/share/httpd/default-health/status.txt; }
 location ^~ /favicon.ico { alias /usr/local/share/httpd/default-icons/favicon.png; }
 location ^~ /health/txt { alias /usr/local/share/httpd/default-health/status.txt; }
