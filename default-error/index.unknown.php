@@ -31,8 +31,6 @@
   <script src="/default-js/errorpages/homepage.js" async defer></script>
   <script src="/default-js/errorpages/loaddomain.js" async defer></script>
   <script src="/default-js/utils/fetch.min.js" async defer></script>
-  <script src="/default-js/utils/popper.min.js" async defer></script>
-  <script src="/default-js/utils/bootstrap.bundle.min.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/passprotect@1.0.0/umd/passprotect.min.js" crossorigin="anonymous" defer async></script>
   <!-- End Default Header-->
   <title>Domain Doesn't Exist</title>
