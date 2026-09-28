@@ -186,25 +186,12 @@ cat <<EOF | tee /etc/cron.d/static-website &>"/dev/null"
 
 EOF
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-printf '%s\n' "Creating /etc/nginx/global.d/static.conf" | tee -a "$LOG_FILE"
-if [ -d "/etc/nginx/global.d" ]; then
-  cat <<EOF >"/etc/nginx/global.d/static.conf"
-location ^~ /error/ { root /usr/local/share/httpd; }
-location ^~ /cgi-bin/ { root /usr/local/share/httpd/cgi-bin; }
-location ^~ /health { alias /usr/local/share/httpd/default-health/status.txt; }
-location ^~ /favicon.ico { alias /usr/local/share/httpd/default-icons/favicon.png; }
-location ^~ /health/txt { alias /usr/local/share/httpd/default-health/status.txt; }
-location ^~ /health/json { alias /usr/local/share/httpd/default-health/status.json; }
-location ^~ /health/status { alias /usr/local/share/httpd/default-health/status.json; }
-error_page   403  =  /default-error/403.html;
-error_page   404  =  /default-error/404.html;
-error_page   418  =  /default-error/418.html;
-error_page   500  =  /default-error/500.html;
-error_page   502  =  /default-error/502.html;
-error_page   503  =  /default-error/503.html;
-error_page   504  =  /default-error/504.html;
-
-EOF
+# static.conf is superseded by /etc/nginx/global.d/nginx-defaults.conf (casjay-base/systemmgr),
+# which now defines every location and error_page static.conf used to provide; leaving both in
+# place causes "nginx: [emerg] duplicate location" on reload, so remove the stale file instead.
+if [ -e "/etc/nginx/global.d/static.conf" ]; then
+  printf '%s\n' "Removing stale /etc/nginx/global.d/static.conf" | tee -a "$LOG_FILE"
+  rm -f "/etc/nginx/global.d/static.conf"
   systemctl is-enabled nginx 2>&1 | grep -q enabled && systemctl restart nginx &>>"$LOG_FILE"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
