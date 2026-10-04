@@ -215,6 +215,13 @@ if [ -n "$APACHE_GROUP" ]; then
   chgrp -Rf "$APACHE_GROUP" "$STATICWEB"
   chgrp -Rf "$APACHE_GROUP" "$STATICDIR"
 fi
+
+for www_dir in "/var/www/nginx" "/var/www/apache" "/var/www/caddy" "/var/www/traefix"; do
+  printf '%s\n' "Fixing the permissions of $www_dir"
+  find "$www_dir" -type d -exec chmod 755 {} +
+  find "$www_dir" -type f -exec chmod 644 {} +
+done
+printf '%s\n' "Done fixing the permissions of /var/www"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf '%s\n' "Web assets has been setup" | tee -a "$LOG_FILE"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
