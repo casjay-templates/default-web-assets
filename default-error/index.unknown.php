@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=" en-US">
+<html lang="en-US">
 
 <head>
   <link rel="stylesheet" href="/default-css/errorpages/errorpages.css" />

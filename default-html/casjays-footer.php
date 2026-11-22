@@ -54,7 +54,7 @@
       <div class="clock">
         <br />
         <br />
-        <iframe
+        <iframe title="Current time"
           src="https://freesecure.timeanddate.com/clock/i7k2kmtc/n12/fn6/fs16/fc9ff/tc000/ftb/bas2/bat1/bacfff/pa8/tt0/tw1/th1/ta1/tb4"
           frameborder="0" width="212" height="56"></iframe>
         <br />
