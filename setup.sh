@@ -217,9 +217,11 @@ if [ -n "$APACHE_GROUP" ]; then
 fi
 
 for www_dir in "/var/www/nginx" "/var/www/apache" "/var/www/caddy" "/var/www/traefix"; do
-  printf '%s\n' "Fixing the permissions of $www_dir"
-  find "$www_dir" -type d -exec chmod 755 {} +
-  find "$www_dir" -type f -exec chmod 644 {} +
+  if [ -d "$www_dir" ]; then
+    printf '%s\n' "Fixing the permissions of $www_dir"
+    find "$www_dir" -type d -exec chmod 755 {} +
+    find "$www_dir" -type f -exec chmod 644 {} +
+  fi
 done
 printf '%s\n' "Done fixing the permissions of /var/www"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
