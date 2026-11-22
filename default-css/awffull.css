@@ -83,10 +83,10 @@ td.perday_desc {
   font-weight: normal;
 } /* XXX per Day Section */
 td.perday_val {
-  width: 65px;
+  width: 4.0625rem;
 }
 td.perday_avg {
-  width: 65px;
+  width: 4.0625rem;
 }
 td.viewall {
   text-align: center;
@@ -160,8 +160,8 @@ th.popularity {
 }
 img.flags {
   margin: 0;
-  width: 25px;
-  height: 15px;
+  width: 1.5625rem;
+  height: 0.9375rem;
   padding: 0 0.2em 0 0;
 }
 caption {

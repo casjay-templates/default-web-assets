@@ -3,7 +3,7 @@
 <div class="footer footer-custom col-sm-12">
   <!-- Begin Casjays Developments Footer -->
   <div class="footer vh-100">
-    <div class="footer-custom fs-4">
+    <div class="footer-custom">
       <br />
       <br />
       <br />
@@ -75,6 +75,10 @@
       <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
       <style>
+        .footer-custom {
+          font-size: 0.875rem;
+          line-height: 1.5;
+        }
         .cc-window.cc-banner,
         .cc-window.cc-floating {
           width: 100%;
@@ -83,7 +87,7 @@
           right: 0;
           box-sizing: border-box;
         }
-        @media screen and (min-width: 415px) {
+        @media screen and (min-width: 25.9375em) {
           .cc-window.cc-floating {
             bottom: 0;
             flex-direction: row;

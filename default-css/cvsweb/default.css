@@ -11,7 +11,7 @@ th {
 }
 
 hr {
-  height: 1px;
+  height: 0.0625rem;
   border: none;
   background-color: #000;
 }
@@ -46,29 +46,29 @@ input[type="submit"] {
 /* Navigation header for source views, diffs and annotations */
 .navigate-header {
   background-color: #99e;
-  padding: 2px;
-  border: 2px outset;
+  padding: 0.125rem;
+  border: 0.125rem outset;
 }
 
 /* Directory table */
 table.dir {
-  border-right: 1px solid #ccc;
+  border-right: 0.0625rem solid #ccc;
 }
 
 /* Cells */
 table.dir * td {
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  padding-left: 5px;
-  padding-right: 5px;
+  border-left: 0.0625rem solid #ccc;
+  border-bottom: 0.0625rem solid #ccc;
+  padding-left: 0.3125rem;
+  padding-right: 0.3125rem;
 }
 
 /* Column headers */
 table.dir * th {
   background-color: #ffc;
   border: thin outset;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 0.3125rem;
+  padding-right: 0.3125rem;
 }
 
 /* Sorted column header */
@@ -95,8 +95,8 @@ table.dir * td.dir {
 
 /* Graph link column */
 table.dir * td.graph {
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 0.1875rem;
+  padding-right: 0.1875rem;
   text-align: center;
   width: 1%;
 }
@@ -140,14 +140,14 @@ table.dir * td.log {
 /* Diff-selected revision in log */
 .diff-selected {
   padding-right: 0.5em;
-  border-right: 10px solid #fc6;
+  border-right: 0.625rem solid #fc6;
 }
 
 /* 'Line'-header of each diffed file */
 .diff-heading {
   background-color: #9cc;
-  border: 2px outset;
-  padding: 5px;
+  border: 0.125rem outset;
+  padding: 0.3125rem;
 }
 
 /* Common properties for diff "contents" */
